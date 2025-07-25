@@ -64,7 +64,9 @@ export async function POST(request: Request) {
         .select({ id: postsTable.id, title: postsTable.title })
         .from(postsTable)
       const found = candidates.find(p => generateSlug(p.title || '') === ref)
-      if (found) target = found
+      if (found) {
+        target = await db.query.postsTable.findFirst({ where: eq(postsTable.id, found.id) })
+      }
     }
     if (target) {
       const existing = await db.query.postTagTable.findFirst({

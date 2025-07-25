@@ -20,6 +20,7 @@ import {
 } from "@/db/schema";
 import { desc, eq, sql } from "drizzle-orm";
 import Link from "next/link";
+import type { Route } from "next";
 import { getUserDisplayName } from "@/utils/user";
 import { getInitials } from "@/utils/name-initials";
 import { getSessionFromCookie } from "@/utils/auth";
@@ -171,7 +172,7 @@ export default async function RanglistaPage() {
                         <AvatarImage src={a.avatar ?? ""} alt={a.name} />
                         <AvatarFallback>{getInitials(a.name)}</AvatarFallback>
                       </Avatar>
-                      <Link href={session?.user?.id === a.userId ? "/me" : `/szerzo/${a.userId}`}>{a.name}</Link>
+                      <Link href={(session?.user?.id === a.userId ? "/me" : `/szerzo/${a.userId}`) as Route}>{a.name}</Link>
                     </TableCell>
                     <TableCell className="text-right">{a.postCount}</TableCell>
                   </TableRow>

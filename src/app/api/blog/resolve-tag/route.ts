@@ -21,16 +21,13 @@ export async function GET(request: Request) {
 
   if (!post) {
     const candidates = await db
-      .select({
-        id: postsTable.id,
-        title: postsTable.title,
-        content: postsTable.content,
-        user_id: postsTable.user_id,
-        status: postsTable.status,
-      })
+      .select({ id: postsTable.id, title: postsTable.title })
       .from(postsTable)
 
-    post = candidates.find((p) => generateSlug(p.title || '') === ref) || null
+    const found = candidates.find((p) => generateSlug(p.title || '') === ref)
+    if (found) {
+      post = await db.query.postsTable.findFirst({ where: eq(postsTable.id, found.id) })
+    }
   }
 
   if (!post) {
