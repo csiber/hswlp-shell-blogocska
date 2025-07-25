@@ -56,7 +56,7 @@ export function PostForm() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    const json = await res.json();
+    const json: { id?: string; error?: string } = await res.json();
     if (res.ok) {
       router.push(`/blog/post/${json.id}`);
     } else {

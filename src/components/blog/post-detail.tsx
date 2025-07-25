@@ -3,6 +3,15 @@ import CategoryBadge from "@/components/category-badge";
 import MarkdownViewer from "@/components/markdown-viewer";
 import ReadRewardTracker from "@/components/read-reward-tracker";
 
+interface Post {
+  id: string;
+  title: string;
+  content: string;
+  authorName: string;
+  category: string;
+  imageUrl?: string | null;
+}
+
 interface PostDetailProps {
   id: string;
 }
@@ -12,7 +21,7 @@ export default async function PostDetail({ id }: PostDetailProps) {
   if (!res.ok) {
     throw new Error("Failed to fetch post");
   }
-  const post = await res.json();
+  const post: Post = await res.json();
 
   return (
     <article className="prose mx-auto dark:prose-invert">

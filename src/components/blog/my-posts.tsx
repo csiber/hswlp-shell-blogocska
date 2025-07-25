@@ -19,8 +19,8 @@ export function MyPosts() {
   useEffect(() => {
     if (!session?.user?.id) return;
     fetch(`/api/blog/user/${session.user.id}`)
-      .then((res) => res.json())
-      .then((data) => setPosts(data.posts || []));
+      .then((res) => res.json() as Promise<{ posts?: MyPost[] }>)
+      .then((data) => setPosts(data.posts ?? []));
   }, [session]);
 
   if (!session) return null;

@@ -21,10 +21,12 @@ export default function TagReference({ value, sourceId }: TagReferenceProps) {
 
   useEffect(() => {
     fetch(`/api/blog/resolve-tag?source=${sourceId}&ref=${value}`)
-      .then((res) => (res.ok ? res.json() : null))
+      .then((res) =>
+        res.ok ? (res.json() as Promise<{ post?: Preview }>) : null
+      )
       .then((data) => {
-        if (data && data.post) {
-          setPost(data.post as Preview);
+        if (data?.post) {
+          setPost(data.post);
         }
       })
       .catch(() => {});

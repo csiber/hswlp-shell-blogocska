@@ -24,7 +24,7 @@ export function BlogFeed() {
     const res = await fetch(`/api/blog/feed?page=${pageNum}`);
     const data: { posts?: Post[] } = await res.json();
     if (data.posts?.length) {
-      setPosts((p) => [...p, ...data.posts]);
+      setPosts((p) => [...p, ...(data.posts ?? [])]);
       if (data.posts.length < 20) setHasMore(false);
     } else {
       setHasMore(false);

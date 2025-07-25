@@ -155,6 +155,12 @@ importers:
       ua-parser-js:
         specifier: ^2.0.0
         version: 2.0.3
+      unified:
+        specifier: ^11.0.5
+        version: 11.0.5
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
       usehooks-ts:
         specifier: ^3.1.0
         version: 3.1.1(react@19.1.0)
