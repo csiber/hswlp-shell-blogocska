@@ -5,7 +5,7 @@ import SignInClientPage from "./sign-in.client";
 import { REDIRECT_AFTER_SIGN_IN } from "@/constants";
 
 export const metadata: Metadata = {
-  title: "Bejelentkezés",
+  title: "Blogocska – Álmaid naplója",
   description: "Lépj be a fiókodba",
 };
 

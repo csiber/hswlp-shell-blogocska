@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import TeamInviteClientComponent from "./team-invite.client";
 
 export const metadata: Metadata = {
-  title: "Accept Team Invitation",
+  title: "Blogocska – Álmaid naplója",
   description: "Accept an invitation to join a team",
 };
 

@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { REDIRECT_AFTER_SIGN_IN } from "@/constants";
 
 export const metadata: Metadata = {
-  title: "Regisztráció",
+  title: "Blogocska – Álmaid naplója",
   description: "Új fiók létrehozása",
 };
 

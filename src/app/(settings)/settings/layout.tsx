@@ -22,6 +22,10 @@ export default async function SettingsLayout({
   }
 
   return (
+    <>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset className="w-full flex flex-col">
@@ -44,6 +48,7 @@ export default async function SettingsLayout({
         </div>
       </SidebarInset>
     </SidebarProvider>
+    </>
   );
 }
 

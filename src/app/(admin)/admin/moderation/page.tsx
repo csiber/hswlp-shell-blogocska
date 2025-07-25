@@ -8,7 +8,7 @@ import { getUserDisplayName } from "@/utils/user";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Moderation",
+  title: "Blogocska – Álmaid naplója",
   description: "Pending posts moderation",
 };
 

@@ -3,6 +3,10 @@ import { type ReactNode } from "react";
 
 export default function LegalLayout({ children }: { children: ReactNode }) {
   return (
+    <>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
     <NavFooterLayout>
       <div className="min-h-screen bg-background px-4 py-12">
         <div className="max-w-3xl mx-auto px-6 bg-muted/50 rounded-xl shadow-lg py-12">
@@ -12,5 +16,6 @@ export default function LegalLayout({ children }: { children: ReactNode }) {
         </div>
       </div>
     </NavFooterLayout>
+    </>
   );
 }

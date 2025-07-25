@@ -21,7 +21,7 @@ export default function Page() {
             </Link>
           </li>
           <li className="rounded-xl bg-muted/50 p-6 text-center">
-            <Link href="/write" className="font-medium">
+            <Link href="/write" className="font-medium text-accent">
               Új írás
             </Link>
           </li>

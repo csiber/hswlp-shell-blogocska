@@ -5,7 +5,7 @@ import VerifyEmailClientComponent from "./verify-email.client";
 import { REDIRECT_AFTER_SIGN_IN } from "@/constants";
 
 export const metadata: Metadata = {
-  title: "Verify Email",
+  title: "Blogocska – Álmaid naplója",
   description: "Verify your email address",
 };
 

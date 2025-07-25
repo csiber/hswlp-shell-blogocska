@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   const db = getBlogDB()
   const url = new URL(request.url)
   const page = parseInt(url.searchParams.get('page') || '1', 10)
-  const limit = 20
+  const limit = parseInt(url.searchParams.get('limit') || '20', 10)
   const offset = (page - 1) * limit
 
   const posts = await db

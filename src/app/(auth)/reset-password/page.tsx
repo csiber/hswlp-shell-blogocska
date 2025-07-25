@@ -5,7 +5,7 @@ import ResetPasswordClientComponent from "./reset-password.client";
 import { getResetTokenKey } from "@/utils/auth-utils";
 
 export const metadata: Metadata = {
-  title: "Jelszó visszaállítása",
+  title: "Blogocska – Álmaid naplója",
   description: "Új jelszó megadása a fiókhoz",
 };
 

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import "server-only";
 
@@ -12,15 +11,12 @@ import { AgenticDevStudioStickyBanner } from "@/components/startup-studio-sticky
 
 export const dynamic = "force-dynamic";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: {
-    default: SITE_NAME,
-    template: `%s - ${SITE_NAME}`,
-  },
+  title: "Blogocska – Álmaid naplója",
   description: SITE_DESCRIPTION,
   metadataBase: new URL(SITE_URL),
+  icons: { icon: "/favicon.ico" },
   keywords: ["SaaS", "Next.js", "React", "TypeScript", "Cloudflare Workers", "Edge Computing"],
   authors: [{ name: "Lubomir Georgiev" }],
   creator: "Lubomir Georgiev",
@@ -28,13 +24,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: SITE_URL,
-    title: SITE_NAME,
+    title: "Blogocska – Álmaid naplója",
     description: SITE_DESCRIPTION,
     siteName: SITE_NAME,
+    images: ["/web-app-manifest-512x512.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: SITE_NAME,
+    title: "Blogocska – Álmaid naplója",
     description: SITE_DESCRIPTION,
     creator: "@LubomirGeorg",
   },
@@ -58,7 +55,10 @@ export default function BaseLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
+      <body className="font-serif">
         <NextTopLoader
           initialPosition={0.15}
           shadow="0 0 10px #000, 0 0 5px #000"

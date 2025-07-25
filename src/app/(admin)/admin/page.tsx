@@ -3,7 +3,7 @@ import { UsersTable } from "./_components/users/users-table"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "User Management",
+  title: "Blogocska – Álmaid naplója",
   description: "Manage all users",
 }
 
