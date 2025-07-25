@@ -5,6 +5,7 @@ import type { DrizzleD1Database } from "drizzle-orm/d1";
 import * as schema from "./schema";
 
 export let db: DrizzleD1Database<typeof schema> | null = null;
+export let blogDb: DrizzleD1Database<typeof schema> | null = null;
 
 export const getDB = () => {
   if (db) {
@@ -20,4 +21,20 @@ export const getDB = () => {
   db = drizzle(env.NEXT_TAG_CACHE_D1, { schema, logger: true });
 
   return db;
+};
+
+export const getBlogDB = () => {
+  if (blogDb) {
+    return blogDb;
+  }
+
+  const { env } = getCloudflareContext();
+
+  if (!env.DB) {
+    throw new Error("D1 database not found");
+  }
+
+  blogDb = drizzle(env.DB, { schema, logger: true });
+
+  return blogDb;
 };
