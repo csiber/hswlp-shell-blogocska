@@ -6,11 +6,11 @@ import { getSessionFromCookie } from '@/utils/auth'
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const db = getBlogDB()
   const session = await getSessionFromCookie()
-  const postId = params.id
+  const { id: postId } = await params
 
   const [post] = await db
     .select({
