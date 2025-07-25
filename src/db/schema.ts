@@ -108,6 +108,76 @@ export const postTable = sqliteTable("post", {
   index('post_user_id_idx').on(table.userId),
 ]));
 
+export const POST_STATUS = {
+  DRAFT: 'draft',
+  PENDING: 'pending',
+  APPROVED: 'approved',
+  REJECTED: 'rejected',
+} as const;
+
+export const postStatusTuple = Object.values(POST_STATUS) as [string, ...string[]];
+
+export const postsTable = sqliteTable('posts', {
+  id: text().primaryKey().$defaultFn(() => `pst_${createId()}`).notNull(),
+  user_id: text().notNull(),
+  title: text(),
+  content: text(),
+  category: text(),
+  status: text({ enum: postStatusTuple }).default(POST_STATUS.PENDING).notNull(),
+  image_url: text(),
+  created_at: integer({ mode: 'timestamp' }).$defaultFn(() => new Date()).notNull(),
+  updated_at: integer({ mode: 'timestamp' }).$onUpdateFn(() => new Date()).notNull(),
+}, (table) => ([
+  index('posts_user_id_idx').on(table.user_id),
+]));
+
+export const postReadTable = sqliteTable('post_read', {
+  id: text().primaryKey().$defaultFn(() => `prd_${createId()}`).notNull(),
+  post_id: text().notNull(),
+  user_id: text().notNull(),
+  ip_hash: text().notNull(),
+  duration_sec: integer().notNull(),
+  created_at: integer({ mode: 'timestamp' }).$defaultFn(() => new Date()).notNull(),
+}, (table) => ([
+  index('post_read_post_id_idx').on(table.post_id),
+  index('post_read_user_id_idx').on(table.user_id),
+]));
+
+export const postTagTable = sqliteTable('post_tag', {
+  id: text().primaryKey().$defaultFn(() => `ptag_${createId()}`).notNull(),
+  source_post_id: text().notNull(),
+  target_post_id: text().notNull(),
+}, (table) => ([
+  index('post_tag_source_idx').on(table.source_post_id),
+  index('post_tag_target_idx').on(table.target_post_id),
+]));
+
+export const MOD_ACTION = {
+  APPROVE: 'approve',
+  REJECT: 'reject',
+  FLAG: 'flag',
+  DELETE: 'delete',
+} as const;
+
+export const modActionTuple = Object.values(MOD_ACTION) as [string, ...string[]];
+
+export const moderationLogTable = sqliteTable('moderation_log', {
+  id: text().primaryKey().$defaultFn(() => `mlog_${createId()}`).notNull(),
+  post_id: text().notNull(),
+  moderator_id: text().notNull(),
+  action: text({ enum: modActionTuple }).notNull(),
+  note: text(),
+  created_at: integer({ mode: 'timestamp' }).$defaultFn(() => new Date()).notNull(),
+}, (table) => ([
+  index('moderation_log_post_id_idx').on(table.post_id),
+]));
+
+export const postCategoryTable = sqliteTable('post_category', {
+  id: text().primaryKey().$defaultFn(() => `pcat_${createId()}`).notNull(),
+  slug: text().notNull().unique(),
+  name: text().notNull(),
+});
+
 // Credit transaction types
 export const CREDIT_TRANSACTION_TYPE = {
   PURCHASE: 'PURCHASE',
@@ -403,3 +473,8 @@ export type TeamRole = InferSelectModel<typeof teamRoleTable>;
 export type TeamInvitation = InferSelectModel<typeof teamInvitationTable>;
 export type SlowRequestLog = InferSelectModel<typeof slowRequestLogTable>;
 export type Post = InferSelectModel<typeof postTable>;
+export type BlogPost = InferSelectModel<typeof postsTable>;
+export type PostRead = InferSelectModel<typeof postReadTable>;
+export type PostTag = InferSelectModel<typeof postTagTable>;
+export type ModerationLog = InferSelectModel<typeof moderationLogTable>;
+export type PostCategory = InferSelectModel<typeof postCategoryTable>;
