@@ -4,57 +4,47 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Blogocska – Álmaid naplója",
-  description: "Learn how we collect, use, and protect your data",
+  description: "Tájékozódj adatkezelési gyakorlatunkról",
 };
 
 export default function PrivacyPage() {
   return (
     <>
-      <h1 className="text-4xl font-bold text-foreground mb-8">Privacy Policy</h1>
+      <h1 className="text-4xl font-bold text-foreground mb-8">Adatkezelési tájékoztató</h1>
 
-      <p className="text-muted-foreground mb-6">Last updated: {new Date().toLocaleDateString()}</p>
+      <p className="text-muted-foreground mb-6">Utoljára frissítve: {new Date().toLocaleDateString()}</p>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold text-foreground mb-4">1. Information We Collect</h2>
+        <h2 className="text-2xl font-semibold text-foreground mb-4">1. Milyen adatokat gyűjtünk?</h2>
         <p className="text-muted-foreground">
-          We collect information you provide directly to us, including but not limited to your name,
-          email address, and any other information you choose to provide.
+          Regisztrációkor megadott nevedet és e‑mail címedet, valamint az általad létrehozott bejegyzéseket tároljuk.
         </p>
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold text-foreground mb-4">2. How We Use Your Information</h2>
+        <h2 className="text-2xl font-semibold text-foreground mb-4">2. Az adatok felhasználása</h2>
         <p className="text-muted-foreground">
-          We use the information we collect to:
-        </p>
-        <ul className="list-disc pl-6 mt-2 text-muted-foreground">
-          <li>Provide, maintain, and improve our services</li>
-          <li>Send you technical notices and support messages</li>
-          <li>Respond to your comments and questions</li>
-          <li>Protect against fraud and abuse</li>
-        </ul>
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold text-foreground mb-4">3. Data Security</h2>
-        <p className="text-muted-foreground">
-          We take reasonable measures to help protect information about you from loss, theft,
-          misuse and unauthorized access, disclosure, alteration, and destruction.
+          Az adatokat a szolgáltatás működtetésére, értesítések küldésére és a fiókod biztonságának védelmére használjuk.
         </p>
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold text-foreground mb-4">4. Contact Us</h2>
+        <h2 className="text-2xl font-semibold text-foreground mb-4">3. Adatbiztonság</h2>
         <p className="text-muted-foreground">
-          If you have any questions about this Privacy Policy, please contact us at:
-          <br />
-          Email: privacy@example.com
+          Adatbázisunk a Cloudflare infrastruktúráján található, ahol minden ésszerű intézkedést megteszünk a védelem érdekében.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold text-foreground mb-4">4. Kapcsolat</h2>
+        <p className="text-muted-foreground">
+          Kérdés esetén írj a <code>privacy@hswlp.hu</code> címre.
         </p>
       </section>
 
       <div className="mt-12 text-center">
         <Button asChild>
-          <Link href="/">Return to Home</Link>
+          <Link href="/">Vissza a főoldalra</Link>
         </Button>
       </div>
     </>

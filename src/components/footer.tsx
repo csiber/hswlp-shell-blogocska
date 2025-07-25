@@ -72,11 +72,11 @@ export function Footer() {
           {/* Copyright - Optimized for mobile */}
           <div className="mt-6 pt-6 md:mt-8 md:pt-8 border-t">
             <p className="text-sm text-muted-foreground text-center mb-4">
-              Blogocska – álmaid és gondolataid otthona. Készült a HSWLP rendszerrel.
+              Blogocska – személyes jegyzeteid otthona. Működik a HSWLP platformon.
             </p>
             <div className="flex flex-col items-center gap-6 md:flex-row md:justify-between md:gap-4">
               <p className="text-sm text-muted-foreground text-center md:text-left">
-                © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
+                © {new Date().getFullYear()} {SITE_NAME}. Minden jog fenntartva.
               </p>
 
               <div className="flex flex-col md:flex-row items-center gap-4 md:space-x-4">
