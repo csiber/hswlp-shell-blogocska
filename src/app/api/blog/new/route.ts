@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server'
 import { getBlogDB } from '@/db'
 import { postsTable, POST_STATUS } from '@/db/schema'
+import { postTagTable } from '@/db/schema'
+import { eq, and } from 'drizzle-orm'
+import { generateSlug } from '@/utils/slugify'
 import { getSessionFromCookie } from '@/utils/auth'
 import { getUserCredits, consumeCredits } from '@/utils/credits'
 
@@ -47,6 +50,37 @@ export async function POST(request: Request) {
       image_url: body.image_url ?? null,
     })
     .returning({ id: postsTable.id })
+
+  const mentionRegex = /@([a-zA-Z0-9_-]{3,32})/g
+  const matches = new Set<string>()
+  for (const m of body.content.matchAll(mentionRegex)) {
+    matches.add(m[1])
+  }
+
+  for (const ref of matches) {
+    let target = await db.query.postsTable.findFirst({ where: eq(postsTable.id, ref) })
+    if (!target) {
+      const candidates = await db
+        .select({ id: postsTable.id, title: postsTable.title })
+        .from(postsTable)
+      const found = candidates.find(p => generateSlug(p.title || '') === ref)
+      if (found) target = found
+    }
+    if (target) {
+      const existing = await db.query.postTagTable.findFirst({
+        where: and(
+          eq(postTagTable.source_post_id, post.id),
+          eq(postTagTable.target_post_id, target.id)
+        ),
+      })
+      if (!existing) {
+        await db.insert(postTagTable).values({
+          source_post_id: post.id,
+          target_post_id: target.id,
+        })
+      }
+    }
+  }
 
   if (session.user.role !== 'admin') {
     try {

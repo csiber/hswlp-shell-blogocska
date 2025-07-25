@@ -64,7 +64,7 @@ export function BlogFeed() {
             />
           )}
           <p className="mt-2 text-sm">
-            <TagHighlight text={truncate(p.content, 300)} />
+            <TagHighlight text={truncate(p.content, 300)} sourceId={p.id} />
           </p>
         </article>
       ))}

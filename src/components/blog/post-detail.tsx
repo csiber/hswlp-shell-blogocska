@@ -24,7 +24,7 @@ export default async function PostDetail({ id }: PostDetailProps) {
       {post.imageUrl && (
         <img src={post.imageUrl} alt="" className="my-4 rounded-md" />
       )}
-      <MarkdownViewer content={post.content} className="mt-4" />
+      <MarkdownViewer content={post.content} className="mt-4" postId={post.id} />
       <ReadRewardTracker postId={post.id} />
     </article>
   );
