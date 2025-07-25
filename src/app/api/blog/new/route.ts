@@ -55,9 +55,10 @@ export async function POST(request: Request) {
         amount: 1,
         description: 'Create blog post',
       })
-    } catch {
-      // ignore credit errors after creation
-    }
+    } catch (err) {
+  console.warn('Credit consumption failed', err)
+}
+
   }
 
   return NextResponse.json({ id: post.id })
