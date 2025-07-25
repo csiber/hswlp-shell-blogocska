@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
-import AgenticDevStudioLogo from "./agenticdev-studio-logo";
 import { ChevronLeft, X } from "lucide-react";
 
 const STORAGE_KEY = 'agenticdev-studio-banner-collapsed';
@@ -66,22 +65,20 @@ export function AgenticDevStudioStickyBanner() {
             </Button>
             <div className="flex items-center flex-col py-3 px-3">
               <a
-                href="https://agenticdev.agency?ref=saas-template-sticky-banner"
+                href="https://hswlp.hu"
                 target="_blank"
                 className="flex flex-col items-center font-medium text-sm hover:text-foreground transition-colors"
               >
                 <div className="flex items-center">
-                  <span className="whitespace-nowrap">Built by</span>
-                  <AgenticDevStudioLogo className="h-7 w-7 mx-1.5" />
-                  <span className="whitespace-nowrap">AgenticDev</span>
+                  <span className="whitespace-nowrap">HSWLP</span>
                 </div>
 
-                <div className="text-tiny text-muted-foreground mt-3">
-                Transform operations with AI solutions that adapt to your actual needs—automating routine tasks or solving complex challenges through customized systems. Focus on growth while we handle the tech specifics that matter most to your business.
+                <div className="text-tiny text-muted-foreground mt-3 text-center">
+                  Egyetlen platform szolgáltatások indítására, weboldalak kiadására és automatizálásra. Fejlesztőknek, vállalkozóknak és techmániásoknak. Nincs szükség szerverre – elég egy ötlet.
                 </div>
               </a>
               <Button size="sm" className="mt-4" asChild>
-                <a href="https://agenticdev.agency?ref=saas-template-sticky-banner" target="_blank">Book a free consultation</a>
+                <a href="https://hswlp.hu" target="_blank">Fedezd fel a HSWLP-t</a>
               </Button>
             </div>
           </div>
