@@ -58,7 +58,7 @@ export function PostForm() {
     });
     const json = await res.json();
     if (res.ok) {
-      router.push(`/post/${json.id}`);
+      router.push(`/blog/post/${json.id}`);
     } else {
       toast.error(json.error || "Hiba történt");
     }
