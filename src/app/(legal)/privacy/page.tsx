@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
+  title: "Blogocska – Álmaid naplója",
   description: "Learn how we collect, use, and protect your data",
 };
 

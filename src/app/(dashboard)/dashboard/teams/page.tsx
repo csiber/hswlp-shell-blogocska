@@ -10,7 +10,7 @@ import { PageHeader } from "@/components/page-header";
 import { PendingInvitations } from "./pending-invitations";
 
 export const metadata = {
-  title: "Csapataim",
+  title: "Blogocska – Álmaid naplója",
   description: "Csapatok és együttműködések kezelése",
 };
 

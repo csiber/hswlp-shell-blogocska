@@ -27,7 +27,7 @@ import { getSessionFromCookie } from "@/utils/auth";
 import { formatDistanceToNow } from "date-fns";
 
 export const metadata = {
-  title: "Ranglista",
+  title: "Blogocska – Álmaid naplója",
 };
 
 export default async function RanglistaPage() {

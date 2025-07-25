@@ -6,7 +6,7 @@ import { sql } from "drizzle-orm";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Statisztika",
+  title: "Blogocska – Álmaid naplója",
   description: "Rendszer statisztikák",
 };
 

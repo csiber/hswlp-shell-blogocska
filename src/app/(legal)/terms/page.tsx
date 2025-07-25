@@ -4,7 +4,7 @@ import Link from "next/link";
 import { CREDITS_EXPIRATION_YEARS } from "@/constants";
 
 export const metadata: Metadata = {
-  title: "Terms of Service",
+  title: "Blogocska – Álmaid naplója",
   description: "Read our terms of service and usage agreement",
 };
 

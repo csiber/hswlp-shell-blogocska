@@ -4,7 +4,7 @@ import { CreateTeamForm } from "@/components/teams/create-team-form";
 import { PageHeader } from "@/components/page-header";
 
 export const metadata = {
-  title: "Csapat létrehozása",
+  title: "Blogocska – Álmaid naplója",
   description: "Új csapat létrehozása a szervezeted számára",
 };
 

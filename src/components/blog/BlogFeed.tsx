@@ -21,11 +21,11 @@ export function BlogFeed() {
   const { ref: loaderRef, entry } = useIntersectionObserver({});
 
   const loadPosts = async (pageNum: number) => {
-    const res = await fetch(`/api/blog/feed?page=${pageNum}`);
+    const res = await fetch(`/api/blog/feed?page=${pageNum}&limit=10`);
     const data: { posts?: Post[] } = await res.json();
     if (data.posts?.length) {
       setPosts((p) => [...p, ...(data.posts ?? [])]);
-      if (data.posts.length < 20) setHasMore(false);
+      if (data.posts.length < 10) setHasMore(false);
     } else {
       setHasMore(false);
     }
@@ -52,7 +52,7 @@ export function BlogFeed() {
         <article key={p.id} className="border-b pb-4">
           <h2 className="text-xl font-bold">{p.title}</h2>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <span>{p.authorName}</span>
+            <span className="font-semibold text-primary">{p.authorName}</span>
             <CategoryBadge name={p.category} />
           </div>
           {p.imageUrl && (
@@ -62,7 +62,7 @@ export function BlogFeed() {
               className="my-2 max-h-60 w-full rounded-md object-cover"
             />
           )}
-          <p className="mt-2 text-sm">
+          <p className="mt-2 text-sm leading-relaxed prose">
             <TagHighlight text={truncate(p.content, 300)} sourceId={p.id} />
           </p>
         </article>

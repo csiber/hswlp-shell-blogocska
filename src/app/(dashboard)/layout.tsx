@@ -14,11 +14,16 @@ export default async function DashboardLayout({ children }: { children: React.Re
   }
 
   return (
+    <>
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
         {children}
       </SidebarInset>
     </SidebarProvider>
+    </>
   )
 }

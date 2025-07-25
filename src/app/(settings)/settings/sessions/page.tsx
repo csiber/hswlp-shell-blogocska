@@ -5,7 +5,7 @@ import { getSessionsAction } from "./sessions.actions";
 import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Sessions",
+  title: "Blogocska – Álmaid naplója",
   description: "Manage your active sessions",
 };
 
