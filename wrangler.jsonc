@@ -5,7 +5,7 @@
  {
     "$schema": "node_modules/wrangler/config-schema.json",
     "account_id": "4e3646aaf967d8895e6596df2d62c3bf",
-    "name": "hswlp-next",
+    "name": "hswlp-shell-blogocska",
     "main": ".open-next/worker.js",
     "compatibility_date": "2025-03-01",
     "compatibility_flags": [
@@ -55,7 +55,7 @@
      "services": [
       {
         "binding": "WORKER_SELF_REFERENCE",
-        "service": "hswlp-next",
+        "service": "hswlp-shell-blogocska",
       }
     ],
 
@@ -73,14 +73,14 @@
 "d1_databases": [
   {
     "binding": "DB",
-    "database_name": "hswlp-d1",
-    "database_id": "f81305ef-3fa9-40d5-a3ab-6ca18e568d9e",
+    "database_name": "blogocska-d1",
+    "database_id": "22a578d0-3d9d-4b7a-9379-b96b493febd8",
     "migrations_dir": "src/db/migrations"
   },
   {
     "binding": "NEXT_TAG_CACHE_D1",
-    "database_name": "hswlp-d1",
-    "database_id": "f81305ef-3fa9-40d5-a3ab-6ca18e568d9e"
+    "database_name": "blogocska-d1",
+    "database_id": "22a578d0-3d9d-4b7a-9379-b96b493febd8"
   }
 ],
 "kv_namespaces": [
@@ -95,8 +95,8 @@
 ],
     "r2_buckets": [
     {
-      "bucket_name": "hswlp-r2",
-      "binding": "hswlp_r2"
+      "bucket_name": "blogocska-r2",
+      "binding": "blogocska_r2"
     }
   ]
   }
