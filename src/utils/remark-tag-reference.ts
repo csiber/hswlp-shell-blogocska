@@ -1,7 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-import type { Plugin } from 'unified';
 import { visit } from 'unist-util-visit';
-import type { Parent, Text } from 'unist';
+import type { Parent } from 'unist';
+import type { Text } from 'mdast';
 
 const mentionRegex = /@([a-zA-Z0-9_-]{3,32})/g;
 
@@ -9,8 +8,9 @@ const mentionRegex = /@([a-zA-Z0-9_-]{3,32})/g;
  * Remark plugin that transforms @mentions into link nodes with tag: prefix
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const remarkTagReference: Plugin = () => (tree: any) => {
-  visit(tree, 'text', (node: Text, index: number, parent: Parent | undefined) => {
+export const remarkTagReference = () => (tree: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (visit as any)(tree, 'text', (node: Text, index: number, parent: Parent | undefined) => {
     if (!parent) return;
     const value = String(node.value);
     const matches = [...value.matchAll(mentionRegex)];

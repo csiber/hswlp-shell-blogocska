@@ -16,7 +16,8 @@ export function MarkdownViewer({ content, className, postId }: MarkdownViewerPro
   return (
     <ReactMarkdown
       className={className}
-      remarkPlugins={[remarkGfm, remarkTagReference]}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      remarkPlugins={[remarkGfm, remarkTagReference as any]}
       components={{
         a({ href, children }) {
           if (href?.startsWith("tag:")) {
