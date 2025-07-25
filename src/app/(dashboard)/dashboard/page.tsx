@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Route } from "next";
 import { PageHeader } from "@/components/page-header";
 
 export default function Page() {
@@ -25,7 +26,7 @@ export default function Page() {
             </Link>
           </li>
           <li className="rounded-xl bg-muted/50 p-6 text-center">
-            <Link href="/dashboard/statistics" className="font-medium">
+            <Link href={"/dashboard/statistics" as Route} className="font-medium">
               Statisztika
             </Link>
           </li>
