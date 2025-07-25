@@ -55,8 +55,9 @@ export default function CategoriesClient({ initialCategories }: Props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-    const data = await res.json();
+    const result = await res.json();
     if (res.ok) {
+      const data = result as Category;
       if (editing) {
         setCategories((prev) => prev.map((c) => (c.id === editing.id ? { ...c, name, slug } : c)));
         toast.success("Kategória frissítve");
@@ -66,7 +67,7 @@ export default function CategoriesClient({ initialCategories }: Props) {
       }
       setOpen(false);
     } else {
-      toast.error(data.error || "Hiba történt");
+      toast.error((result as { error?: string }).error || "Hiba történt");
     }
   }
 

@@ -5,7 +5,7 @@ import { requireAdmin } from '@/utils/auth';
 import { generateSlug } from '@/utils/slugify';
 import { eq, sql } from 'drizzle-orm';
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await requireAdmin({ doNotThrowError: false });
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -21,26 +21,28 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
   const existing = await db.query.postCategoryTable.findFirst({
     where: eq(postCategoryTable.slug, slug),
   });
-  if (existing && existing.id !== params.id) {
+  const { id } = await params;
+  if (existing && existing.id !== id) {
     return NextResponse.json({ error: 'Slug already exists' }, { status: 400 });
   }
 
   await db
     .update(postCategoryTable)
     .set({ name, slug })
-    .where(eq(postCategoryTable.id, params.id));
+    .where(eq(postCategoryTable.id, id));
 
   return NextResponse.json({ success: true });
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await requireAdmin({ doNotThrowError: false });
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
   const db = getBlogDB();
+  const { id } = await params;
   const category = await db.query.postCategoryTable.findFirst({
-    where: eq(postCategoryTable.id, params.id),
+    where: eq(postCategoryTable.id, id),
   });
   if (!category) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
@@ -58,7 +60,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     );
   }
 
-  await db.delete(postCategoryTable).where(eq(postCategoryTable.id, params.id));
+  await db.delete(postCategoryTable).where(eq(postCategoryTable.id, id));
 
   return NextResponse.json({ success: true });
 }

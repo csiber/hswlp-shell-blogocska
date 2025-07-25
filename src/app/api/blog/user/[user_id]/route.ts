@@ -6,14 +6,14 @@ import { getSessionFromCookie } from '@/utils/auth'
 
 export async function GET(
   request: Request,
-  { params }: { params: { user_id: string } }
+  { params }: { params: Promise<{ user_id: string }> }
 ) {
   const session = await getSessionFromCookie()
   if (!session || !session.user?.id) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const targetUserId = params.user_id
+  const { user_id: targetUserId } = await params
   if (session.user.id !== targetUserId && session.user.role !== 'admin') {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
