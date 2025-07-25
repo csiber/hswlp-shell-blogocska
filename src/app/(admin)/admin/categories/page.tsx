@@ -1,8 +1,6 @@
 import { PageHeader } from "@/components/page-header";
 import { requireAdmin } from "@/utils/auth";
 import { getBlogDB } from "@/db";
-import { postCategoryTable } from "@/db/schema";
-import { asc } from "drizzle-orm";
 import type { Metadata } from "next";
 import CategoriesClient from "./categories.client";
 
