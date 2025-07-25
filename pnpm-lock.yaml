@@ -189,6 +189,9 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.16
         version: 0.5.16(tailwindcss@3.4.17)
+      '@types/mdast':
+        specifier: ^4.0.4
+        version: 4.0.4
       '@types/ms':
         specifier: ^0.7.34
         version: 0.7.34
@@ -201,6 +204,9 @@ importers:
       '@types/react-dom':
         specifier: ^19
         version: 19.1.6(@types/react@19.1.8)
+      '@types/unist':
+        specifier: ^3.0.3
+        version: 3.0.3
       drizzle-kit:
         specifier: ^0.30.6
         version: 0.30.6
