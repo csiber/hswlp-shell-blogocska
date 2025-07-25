@@ -74,7 +74,7 @@ export default function CategoriesClient({ initialCategories }: Props) {
   async function handleDelete(cat: Category) {
     if (!confirm("Biztosan törlöd?")) return;
     const res = await fetch(`/api/blog/categories/${cat.id}`, { method: "DELETE" });
-    const data = await res.json();
+    const data: { error?: string } = await res.json();
     if (res.ok) {
       setCategories((prev) => prev.filter((c) => c.id !== cat.id));
       toast.success("Kategória törölve");
