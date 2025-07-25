@@ -12,16 +12,17 @@ export const metadata: Metadata = {
   description: "Pending posts moderation",
 };
 
-interface PageProps {
-  searchParams: { category?: string };
+interface Props {
+  searchParams: Promise<{ category?: string }>;
 }
 
-export default async function ModerationPage({ searchParams }: PageProps) {
+export default async function ModerationPage({ searchParams }: Props) {
   await requireAdmin();
   const db = getBlogDB();
   const whereClauses = [eq(postsTable.status, POST_STATUS.PENDING)];
-  if (searchParams?.category) {
-    whereClauses.push(eq(postsTable.category, searchParams.category));
+  const params = await searchParams;
+  if (params?.category) {
+    whereClauses.push(eq(postsTable.category, params.category));
   }
 
   const rows = await db
