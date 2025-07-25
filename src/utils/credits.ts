@@ -83,6 +83,15 @@ export async function updateUserCredits(userId: string, creditsToAdd: number) {
   await updateAllSessionsOfUser(userId);
 }
 
+export async function getUserCredits(userId: string): Promise<number> {
+  const db = getDB();
+  const user = await db.query.userTable.findFirst({
+    where: eq(userTable.id, userId),
+    columns: { currentCredits: true },
+  });
+  return user?.currentCredits ?? 0;
+}
+
 async function updateLastRefreshDate(userId: string, date: Date) {
   const db = getDB();
   await db
