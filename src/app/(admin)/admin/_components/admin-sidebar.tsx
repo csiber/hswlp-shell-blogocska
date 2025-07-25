@@ -19,7 +19,7 @@ import {
   SidebarRail,
   SidebarGroup,
 } from "@/components/ui/sidebar"
-import { Tag } from "lucide-react"
+import { Tag, BarChart3 } from "lucide-react"
 
 export type NavItem = {
   title: string
@@ -43,6 +43,11 @@ const adminNavItems: NavMainItem[] = [
     title: "Categories",
     url: "/admin/categories",
     icon: Tag,
+  },
+  {
+    title: "Statistics",
+    url: "/admin/statistics",
+    icon: BarChart3,
   },
 ]
 
