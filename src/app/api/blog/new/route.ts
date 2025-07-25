@@ -55,7 +55,7 @@ export async function POST(request: Request) {
         amount: 1,
         description: 'Create blog post',
       })
-    } catch (_) {
+    } catch {
       // ignore credit errors after creation
     }
   }
