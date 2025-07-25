@@ -43,9 +43,15 @@ export function Navigation() {
 
   const navItems: NavItem[] = [
     { name: "Főoldal", href: "/" },
+    { name: "Ranglista", href: "/ranglista" },
     ...(session ? [
-      { name: "Beállítások", href: "/settings" },
-      { name: "Vezérlőpult", href: "/dashboard" },
+      { name: "Írás", href: "/write" },
+      { name: "Saját posztok", href: "/me" },
+    ] as NavItem[] : []),
+    ...(session?.user?.role === 'admin' ? [
+      { name: "Moderáció", href: "/admin/moderation" },
+      { name: "Kategóriák", href: "/admin/categories" },
+      { name: "Statisztika", href: "/admin/statistics" },
     ] as NavItem[] : []),
   ]
 
