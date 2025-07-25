@@ -46,9 +46,6 @@ export const userTable = sqliteTable("user", {
   signUpIpAddress: text({
     length: 100,
   }),
-  googleAccountId: text({
-    length: 255,
-  }),
   /**
    * This can either be an absolute or relative path to an image
    */
@@ -62,7 +59,6 @@ export const userTable = sqliteTable("user", {
   }),
 }, (table) => ([
   index('email_idx').on(table.email),
-  index('google_account_id_idx').on(table.googleAccountId),
   index('role_idx').on(table.role),
 ]));
 
