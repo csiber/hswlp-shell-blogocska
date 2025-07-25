@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useIntersectionObserver } from "usehooks-ts";
 import TagHighlight from "@/components/tag-highlight";
 import CategoryBadge from "@/components/category-badge";
@@ -18,12 +18,11 @@ export function BlogFeed() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const loaderRef = useRef<HTMLDivElement | null>(null);
-  const entry = useIntersectionObserver(loaderRef, {});
+  const { ref: loaderRef, entry } = useIntersectionObserver({});
 
   const loadPosts = async (pageNum: number) => {
     const res = await fetch(`/api/blog/feed?page=${pageNum}`);
-    const data = await res.json();
+    const data: { posts?: Post[] } = await res.json();
     if (data.posts?.length) {
       setPosts((p) => [...p, ...data.posts]);
       if (data.posts.length < 20) setHasMore(false);

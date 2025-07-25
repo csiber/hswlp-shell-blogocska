@@ -10,8 +10,7 @@ interface ReadRewardTrackerProps {
 
 export function ReadRewardTracker({ postId }: ReadRewardTrackerProps) {
   const start = useRef(Date.now());
-  const sentinelRef = useRef<HTMLDivElement | null>(null);
-  const entry = useIntersectionObserver(sentinelRef, {});
+  const { ref: sentinelRef, entry } = useIntersectionObserver({});
   const marked = useRef(false);
 
   useEffect(() => {
