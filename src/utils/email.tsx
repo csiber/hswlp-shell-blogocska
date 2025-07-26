@@ -270,3 +270,46 @@ export async function sendTeamInvitationEmail({
     });
   }
 }
+
+import { BugReportEmail } from "@/react-email/bug-report"
+
+export async function sendBugReportEmail({
+  name,
+  email,
+  description,
+  screenshotUrl,
+}: {
+  name?: string
+  email?: string
+  description: string
+  screenshotUrl?: string
+}) {
+  const html = await render(
+    BugReportEmail({ name, email, description, screenshotUrl })
+  )
+  const provider = await getEmailProvider()
+
+  if (!provider && isProd) {
+    throw new Error(
+      "No email provider configured. Set either RESEND_API_KEY or BREVO_API_KEY in your environment."
+    )
+  }
+
+  if (provider === "resend") {
+    await sendResendEmail({
+      to: ["info@hswlp.com"],
+      subject: `Bug report on ${SITE_DOMAIN}`,
+      html,
+      replyTo: email,
+      tags: [{ name: "type", value: "bug-report" }],
+    })
+  } else {
+    await sendBrevoEmail({
+      to: [{ email: "info@hswlp.com" }],
+      subject: `Bug report on ${SITE_DOMAIN}`,
+      htmlContent: html,
+      replyTo: email,
+      tags: ["bug-report"],
+    })
+  }
+}
