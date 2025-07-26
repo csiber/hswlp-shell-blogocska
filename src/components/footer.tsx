@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { SiX as XIcon, SiGithub as GithubIcon } from '@icons-pack/react-simple-icons'
 import ThemeSwitch from "@/components/theme-switch";
 import { SITE_NAME } from "@/constants";
 
@@ -39,28 +38,11 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Social Links and Theme Switch */}
+            {/* Kapcsolat és téma váltó */}
             <div className="space-y-3 md:space-y-4 flex flex-col items-center md:items-start">
-              <h3 className="text-sm font-semibold text-foreground text-center md:text-left">Nézd meg egyéb oldalainkat is:</h3>
-              <div className="flex items-center space-x-4">
-                <a
-                  href="https://yumekai.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  <GithubIcon className="h-5 w-5" />
-                  <span className="sr-only">Yumekai - AI kép és zene megosztó közösségi oldal</span>
-                </a>
-                <a
-                  href="https://hswlp.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  <XIcon className="h-5 w-5" />
-                  <span className="sr-only">HSWLP</span>
-                </a>
+              <h3 className="text-sm font-semibold text-foreground text-center md:text-left">Kapcsolat</h3>
+              <div className="text-muted-foreground text-sm text-center md:text-left">
+                <a href="mailto:hello@hswlp.com" className="hover:text-foreground">hello@hswlp.com</a>
               </div>
             </div>
           </div>
@@ -85,8 +67,7 @@ export function Footer() {
                     target="_blank"
                     className="flex items-center font-medium text-sm hover:text-foreground transition-colors"
                   >
-                    <span className="whitespace-nowrap">Készítette</span>
-                    <span className="whitespace-nowrap">HSWLP csapata</span>
+                    <span className="whitespace-nowrap">Készítette: HSWLP csapata</span>
                   </a>
                 </div>
               </div>
