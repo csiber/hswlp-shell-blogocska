@@ -1,11 +1,7 @@
 import Link from "next/link";
 import { SiX as XIcon, SiGithub as GithubIcon } from '@icons-pack/react-simple-icons'
 import ThemeSwitch from "@/components/theme-switch";
-import { GITHUB_REPO_URL, SITE_NAME } from "@/constants";
-import { Button } from "./ui/button";
-import AgenticDevStudioLogo from "./agenticdev-studio-logo";
-import { getGithubStars } from "@/utils/stats";
-import { Suspense } from "react";
+import { SITE_NAME } from "@/constants";
 
 export function Footer() {
   return (
@@ -45,25 +41,25 @@ export function Footer() {
 
             {/* Social Links and Theme Switch */}
             <div className="space-y-3 md:space-y-4 flex flex-col items-center md:items-start">
-              <h3 className="text-sm font-semibold text-foreground text-center md:text-left">Közösség</h3>
+              <h3 className="text-sm font-semibold text-foreground text-center md:text-left">Nézd meg egyéb oldalainkat is:</h3>
               <div className="flex items-center space-x-4">
                 <a
-                  href="https://github.com/LubomirGeorgiev"
+                  href="https://yumekai.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground"
                 >
                   <GithubIcon className="h-5 w-5" />
-                  <span className="sr-only">GitHub</span>
+                  <span className="sr-only">Yumekai - AI kép és zene megosztó közösségi oldal</span>
                 </a>
                 <a
-                  href="https://x.com/LubomirGeorg"
+                  href="https://hswlp.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground"
                 >
                   <XIcon className="h-5 w-5" />
-                  <span className="sr-only">X</span>
+                  <span className="sr-only">HSWLP</span>
                 </a>
               </div>
             </div>
@@ -80,11 +76,6 @@ export function Footer() {
               </p>
 
               <div className="flex flex-col md:flex-row items-center gap-4 md:space-x-4">
-                {GITHUB_REPO_URL && (
-                  <Suspense fallback={<GithubButtonFallback />}>
-                    <GithubButton />
-                  </Suspense>
-                )}
 
                 <div className="flex items-center gap-4">
                   <ThemeSwitch />
@@ -95,8 +86,7 @@ export function Footer() {
                     className="flex items-center font-medium text-sm hover:text-foreground transition-colors"
                   >
                     <span className="whitespace-nowrap">Készítette</span>
-                    <AgenticDevStudioLogo className="h-7 w-7 mx-1.5" />
-                    <span className="whitespace-nowrap">AgenticDev</span>
+                    <span className="whitespace-nowrap">HSWLP csapata</span>
                   </a>
                 </div>
               </div>
@@ -108,40 +98,3 @@ export function Footer() {
   );
 }
 
-// This component will be wrapped in Suspense
-async function GithubButton() {
-  const starsCount = await getGithubStars();
-
-  return (
-    <Button variant="outline" size="sm" className="w-full md:w-auto h-9" asChild>
-      <a
-        href={GITHUB_REPO_URL!}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center space-x-2"
-      >
-        <GithubIcon className="h-4 w-4" />
-        <span className="whitespace-nowrap">
-          {starsCount ? `Fork a Githubon (${starsCount} csillag)` : "Fork a Githubon"}
-        </span>
-      </a>
-    </Button>
-  );
-}
-
-// Fallback while loading stars count
-function GithubButtonFallback() {
-  return (
-    <Button variant="outline" size="sm" className="w-full md:w-auto h-9" asChild>
-      <a
-        href={GITHUB_REPO_URL!}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center space-x-2"
-      >
-        <GithubIcon className="h-4 w-4" />
-        <span className="whitespace-nowrap">Fork a Githubon</span>
-      </a>
-    </Button>
-  );
-}
