@@ -63,4 +63,9 @@ const container = {
 }
 const preheader = { color: '#333333', fontSize: '20px', fontWeight: 'bold' }
 const paragraph = { color: '#333333', fontSize: '16px', lineHeight: '24px' }
-const footer = { color: '#8898aa', fontSize: '12px', marginTop: '20px', textAlign: 'center' }
+const footer: React.CSSProperties = {
+  color: '#8898aa',
+  fontSize: '12px',
+  marginTop: '20px',
+  textAlign: 'center',
+}
