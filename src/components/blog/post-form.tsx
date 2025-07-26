@@ -5,9 +5,14 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useSessionStore } from "@/state/session";
 import MarkdownViewer from "@/components/markdown-viewer";
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import dynamic from "next/dynamic";
+import { useRef } from "react";
+const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
 import {
   Select,
   SelectContent,
@@ -15,7 +20,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 
 const categories = [
   { value: "alom", label: "Álom" },
@@ -42,6 +46,31 @@ export function PostForm() {
     defaultValues: { category: categories[0].value },
   });
   const content = watch("content");
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const res = await fetch("/api/blog/image/upload", {
+      method: "POST",
+      body: file,
+    });
+    const json: { url?: string; key?: string; error?: string } = await res.json();
+    if (res.ok && json.url) {
+      setValue("content", `${content || ""}\n![${file.name}](${json.url})\n`);
+    } else {
+      toast.error(json.error || "Hiba a kép feltöltésekor");
+    }
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const handleYoutube = () => {
+    const url = prompt("YouTube link?");
+    if (!url) return;
+    const id = url.includes("v=") ? new URL(url).searchParams.get("v") : url.split("/").pop();
+    if (!id) return;
+    setValue("content", `${content || ""}\n![youtube](${id})\n`);
+  };
 
   const onSubmit = async (data: FormValues) => {
     if (
@@ -90,7 +119,22 @@ export function PostForm() {
       </div>
       <div className="space-y-2">
         <Label htmlFor="content">Tartalom</Label>
-        <Textarea id="content" rows={8} {...register("content", { required: true })} />
+        <MDEditor
+          value={content}
+          onChange={(v) => setValue("content", v || "")}
+          textareaProps={{ id: "content" }}
+        />
+        <div className="flex gap-2 mt-2">
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            className="hidden"
+            onChange={handleImageUpload}
+          />
+          <Button type="button" onClick={() => fileInputRef.current?.click()}>Kép feltöltése</Button>
+          <Button type="button" onClick={handleYoutube}>YouTube beágyazás</Button>
+        </div>
         <div className="prose dark:prose-invert mt-2">
           <MarkdownViewer content={content || ""} />
         </div>

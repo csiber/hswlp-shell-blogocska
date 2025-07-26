@@ -26,6 +26,23 @@ export function MarkdownViewer({ content, className, postId }: MarkdownViewerPro
           }
           return <a href={href}>{children}</a>;
         },
+        img({ src, alt }) {
+          if (alt === "youtube" && src) {
+            const srcStr = String(src)
+            const id = srcStr.includes("http")
+              ? new URL(srcStr).searchParams.get("v") || srcStr
+              : srcStr
+            return (
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${id}`}
+                className="w-full aspect-video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            )
+          }
+          return <img src={src ?? ""} alt={alt} />
+        },
       }}
     >
       {content}
