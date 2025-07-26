@@ -5,18 +5,13 @@ import type { Route } from 'next'
 
 import {
   Building2,
-  Frame,
-  Map,
-  PieChart,
   Settings2,
   ShoppingCart,
   SquareTerminal,
   CreditCard,
-  Users,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
 import { TeamSwitcher } from "@/components/team-switcher"
 import {
@@ -90,11 +85,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         isActive: true,
       },
       {
-        title: "Csapatok",
-        url: "/dashboard/teams" as Route,
-        icon: Users,
-      },
-      {
         title: "Piactér",
         url: "/dashboard/marketplace",
         icon: ShoppingCart,
@@ -128,23 +118,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         ],
       },
     ],
-    projects: [
-      {
-        title: "Design Engineering",
-        url: "#",
-        icon: Frame,
-      },
-      {
-        title: "Sales & Marketing",
-        url: "#",
-        icon: PieChart,
-      },
-      {
-        title: "Travel",
-        url: "#",
-        icon: Map,
-      },
-    ],
+    projects: [],
   }
 
   return (
@@ -156,8 +130,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       )}
 
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+          <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />

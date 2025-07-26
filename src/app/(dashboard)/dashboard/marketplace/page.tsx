@@ -15,22 +15,22 @@ export default async function MarketplacePage() {
         items={[
           {
             href: "/dashboard/marketplace",
-            label: "Marketplace"
+            label: "Piactér"
           }
         ]}
       />
       <div className="container mx-auto px-5 pb-12">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mt-4">Component Marketplace</h1>
+          <h1 className="text-4xl font-bold mt-4">Blog extrák piactér</h1>
           <p className="text-muted-foreground mt-2">
-            Purchase and use our premium components using your credits
+            Itt különböző könnyen beilleszthető blog funkciókat vásárolhatsz a pontjaidból.
           </p>
         </div>
 
         <Alert
           color="warning"
-          title="Demo Template Feature"
-          description="This marketplace page demonstrates how to implement a credit-based billing system in your SaaS application. Feel free to use this as a starting point and customize it for your specific needs."
+          title="Próba piactér"
+          description="Ez az oldal bemutatja, hogyan tudsz pontokért kiegészítő funkcionalitást venni a blogodra."
           className="mb-6"
         />
 
