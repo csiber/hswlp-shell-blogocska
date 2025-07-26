@@ -28,7 +28,7 @@ export async function POST(request: Request) {
   const registeredAt = new Date(session.user.createdAt)
   const threeDaysMs = 3 * 24 * 60 * 60 * 1000
   if (Date.now() - registeredAt.getTime() < threeDaysMs) {
-    return NextResponse.json({ error: 'Account too new' }, { status: 403 })
+    return NextResponse.json({ error: 'To post, you need at least a 3-day account.' }, { status: 403 })
   }
 
   if (session.user.role !== 'admin') {
