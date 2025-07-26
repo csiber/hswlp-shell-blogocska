@@ -62,7 +62,7 @@ export function BlogFeed() {
               className="my-2 max-h-60 w-full rounded-md object-cover"
             />
           )}
-          <p className="mt-2 text-sm leading-relaxed prose">
+          <p className="mt-2 text-sm leading-relaxed prose dark:prose-invert">
             <TagHighlight text={truncate(p.content, 300)} sourceId={p.id} />
           </p>
         </article>
