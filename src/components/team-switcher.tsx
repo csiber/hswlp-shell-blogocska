@@ -1,14 +1,13 @@
 "use client"
 
 import * as React from "react"
-import { Building2, ChevronsUpDown, Plus } from "lucide-react"
+import { Building2, ChevronsUpDown } from "lucide-react"
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
@@ -18,7 +17,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import Link from "next/link"
 
 export function TeamSwitcher({
   teams,
@@ -93,15 +91,6 @@ export function TeamSwitcher({
                 Nincs elérhető csapat
               </DropdownMenuItem>
             )}
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="gap-2 p-2 cursor-pointer" asChild>
-              <Link href="/dashboard/teams/create">
-                <div className="flex size-6 items-center justify-center rounded-md border bg-background">
-                  <Plus className="size-4" />
-                </div>
-                <div className="font-medium text-muted-foreground">Csapat hozzáadása</div>
-              </Link>
-            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
