@@ -51,7 +51,7 @@ export function AgenticDevStudioStickyBanner() {
       method: 'POST',
       body: file,
     })
-    const json = await res.json()
+    const json: { key?: string; error?: string } = await res.json()
     if (res.ok && json.key) {
       setScreenshotKey(json.key)
       toast.success('Kép feltöltve')
@@ -69,7 +69,7 @@ export function AgenticDevStudioStickyBanner() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, description, screenshotKey }),
     })
-    const json = await res.json()
+    const json: { error?: string } = await res.json()
     setSubmitting(false)
     if (res.ok) {
       toast.success('Hibajelentés elküldve')
