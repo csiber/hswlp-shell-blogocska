@@ -4,6 +4,8 @@ import { passKeyCredentialTable } from '@/db/schema'
 import isProd from '@/utils/is-prod'
 import { SITE_DOMAIN, SITE_URL } from '@/constants'
 import { requireVerifiedEmail } from '@/utils/auth'
+import { lazyImport } from '@/utils/lazy-import'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { RegistrationResponseJSON } from '@simplewebauthn/types'
 
 const rpID = isProd ? SITE_DOMAIN : 'localhost'
@@ -24,8 +26,8 @@ export async function POST(request: Request) {
   }
   const body = (await request.json()) as VerifyRequest
 
-  const { verifyRegistrationResponse } = await import('@simplewebauthn/server')
-  const { UAParser } = await import('ua-parser-js')
+  const { verifyRegistrationResponse } = await lazyImport('@simplewebauthn/' + 'server') as any
+  const { UAParser } = await lazyImport('ua-parser-' + 'js') as any
 
   const verification = await verifyRegistrationResponse({
     response: body.response,
@@ -57,3 +59,4 @@ export async function POST(request: Request) {
 
   return NextResponse.json({ success: true, parsedUserAgent })
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */

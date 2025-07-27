@@ -4,6 +4,8 @@ import { passKeyCredentialTable } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import isProd from '@/utils/is-prod'
 import { SITE_DOMAIN, SITE_URL } from '@/constants'
+import { lazyImport } from '@/utils/lazy-import'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AuthenticationResponseJSON } from '@simplewebauthn/types'
 
 const rpID = isProd ? SITE_DOMAIN : 'localhost'
@@ -17,7 +19,7 @@ interface AuthRequest {
 export async function POST(request: Request) {
   const { response, challenge } = (await request.json()) as AuthRequest
 
-  const { verifyAuthenticationResponse } = await import('@simplewebauthn/server')
+  const { verifyAuthenticationResponse } = await lazyImport('@simplewebauthn/' + 'server') as any
 
   const credentialId = response.id
   const db = getDB()
@@ -54,3 +56,4 @@ export async function POST(request: Request) {
 
   return NextResponse.json({ success: true, userId: credential.userId })
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */

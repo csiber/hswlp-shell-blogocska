@@ -5,6 +5,8 @@ import { eq } from 'drizzle-orm'
 import isProd from '@/utils/is-prod'
 import { SITE_NAME, SITE_DOMAIN } from '@/constants'
 import { requireVerifiedEmail } from '@/utils/auth'
+import { lazyImport } from '@/utils/lazy-import'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AuthenticatorTransport } from '@simplewebauthn/types'
 
 const rpName = SITE_NAME
@@ -17,7 +19,7 @@ export async function POST() {
     throw new Error('Not authenticated')
   }
 
-  const { generateRegistrationOptions } = await import('@simplewebauthn/server')
+  const { generateRegistrationOptions } = await lazyImport('@simplewebauthn/' + 'server') as any
 
   const db = getDB()
   const existingCredentials = await db.query.passKeyCredentialTable.findMany({
@@ -41,3 +43,4 @@ export async function POST() {
 
   return NextResponse.json(options)
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */
