@@ -1,6 +1,7 @@
 import CategoryBadge from "@/components/category-badge";
 import MarkdownViewer from "@/components/markdown-viewer";
 import ReadRewardTracker from "@/components/read-reward-tracker";
+import NotFoundComponent from "@/components/blog/not-found-component";
 
 interface Post {
   id: string;
@@ -16,11 +17,21 @@ interface PostDetailProps {
 }
 
 export default async function PostDetail({ id }: PostDetailProps) {
-  const res = await fetch(`/api/blog/${id}`, { cache: "no-store" });
-  if (!res.ok) {
-    throw new Error("Failed to fetch post");
+  let post: Post | null = null;
+  try {
+    const res = await fetch(`/api/blog/${id}`, { cache: "no-store" });
+    if (res.status === 404) {
+      return <NotFoundComponent />;
+    }
+    if (!res.ok) {
+      console.error("Failed to fetch post", res.statusText);
+      return <NotFoundComponent />;
+    }
+    post = (await res.json()) as Post;
+  } catch (err) {
+    console.error("Error loading post", err);
+    return <NotFoundComponent />;
   }
-  const post: Post = await res.json();
 
   return (
     <article className="prose mx-auto dark:prose-invert">
