@@ -5,6 +5,8 @@ import { eq } from 'drizzle-orm'
 import isProd from '@/utils/is-prod'
 import { SITE_DOMAIN } from '@/constants'
 import { requireVerifiedEmail } from '@/utils/auth'
+import { lazyImport } from '@/utils/lazy-import'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AuthenticatorTransport } from '@simplewebauthn/types'
 
 const rpID = isProd ? SITE_DOMAIN : 'localhost'
@@ -15,7 +17,7 @@ export async function POST() {
   if (!session) {
     throw new Error('Not authenticated')
   }
-  const { generateAuthenticationOptions } = await import('@simplewebauthn/server')
+  const { generateAuthenticationOptions } = await lazyImport('@simplewebauthn/' + 'server') as any
 
   const db = getDB()
   const credentials = await db.query.passKeyCredentialTable.findMany({
@@ -35,3 +37,4 @@ export async function POST() {
 
   return NextResponse.json(options)
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */

@@ -1,6 +1,26 @@
 import "server-only";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { generateAuthenticationOptions, generateRegistrationOptions, verifyAuthenticationResponse, verifyRegistrationResponse } from "@simplewebauthn/server";
+import { lazyImport } from "./lazy-import";
+const webauthn = {
+  generateRegistrationOptions: async (...args: any[]) => {
+    const mod: any = await lazyImport("@simplewebauthn/" + "server");
+    return mod.generateRegistrationOptions(...(args as any));
+  },
+  generateAuthenticationOptions: async (...args: any[]) => {
+    const mod: any = await lazyImport("@simplewebauthn/" + "server");
+    return mod.generateAuthenticationOptions(...(args as any));
+  },
+  verifyRegistrationResponse: async (...args: any[]) => {
+    const mod: any = await lazyImport("@simplewebauthn/" + "server");
+    return mod.verifyRegistrationResponse(...(args as any));
+  },
+  verifyAuthenticationResponse: async (...args: any[]) => {
+    const mod: any = await lazyImport("@simplewebauthn/" + "server");
+    return mod.verifyAuthenticationResponse(...(args as any));
+  },
+};
+/* eslint-enable @typescript-eslint/no-explicit-any */
 import type {
   AuthenticationResponseJSON,
   AuthenticatorTransport,
@@ -22,7 +42,7 @@ export async function generatePasskeyRegistrationOptions(userId: string, email: 
     where: eq(passKeyCredentialTable.userId, userId),
   });
 
-  const options = await generateRegistrationOptions({
+  const options = await webauthn.generateRegistrationOptions({
     rpName,
     rpID,
     userID: Buffer.from(userId),
@@ -51,7 +71,7 @@ export async function verifyPasskeyRegistration({
   userAgent?: string | null;
   ipAddress?: string | null;
 }) {
-  const verification = await verifyRegistrationResponse({
+  const verification = await webauthn.verifyRegistrationResponse({
     response,
     expectedChallenge: challenge,
     expectedOrigin: origin,
@@ -83,7 +103,7 @@ export async function generatePasskeyAuthenticationOptions() {
   const db = getDB();
   const credentials = await db.query.passKeyCredentialTable.findMany();
 
-  const options = await generateAuthenticationOptions({
+  const options = await webauthn.generateAuthenticationOptions({
     rpID,
     allowCredentials: credentials.map(cred => ({
       id: cred.credentialId,
@@ -110,7 +130,7 @@ export async function verifyPasskeyAuthentication(
     throw new Error("Passkey not found");
   }
 
-  const verification = await verifyAuthenticationResponse({
+  const verification = await webauthn.verifyAuthenticationResponse({
     response,
     expectedChallenge: challenge,
     expectedOrigin: origin,
