@@ -1,10 +1,6 @@
 import PostDetail from "@/components/blog/post-detail";
 import { notFound } from "next/navigation";
-import { getPostBySlug } from "@/server/blog";
-import { drizzle } from "drizzle-orm/d1";
-import { getCloudflareContext } from "@opennextjs/cloudflare";
-import * as schema from "@/db/schema";
-import { generateSlug } from "@/utils/slugify";
+import { getPostBySlug, getAllApprovedPosts } from "@/server/blog";
 
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
@@ -12,22 +8,20 @@ export const revalidate = 0;
 
 export async function generateStaticParams() {
   try {
-    const { env } = await getCloudflareContext({ async: true });
-    if (!env.DB) {
-      return [];
-    }
-    const db = drizzle(env.DB, { schema, logger: true });
-    const posts = await db.select({ title: schema.postsTable.title }).from(schema.postsTable);
-    return posts.map(post => ({
-      slug: generateSlug(post.title || "untitled"),
-    }));
+    const posts = await getAllApprovedPosts();
+    return posts.map((post) => ({ slug: post.slug }));
   } catch {
     return [];
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function Page({ params }: any) {
+interface PostPageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export default async function Page({ params }: PostPageProps) {
   const slug = decodeURIComponent(params.slug);
   const result = await getPostBySlug(slug);
 
