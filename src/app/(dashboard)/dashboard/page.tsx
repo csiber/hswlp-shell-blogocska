@@ -16,12 +16,12 @@ export default function Page() {
       <div className="flex flex-col gap-4 p-4 pt-0">
         <ul className="grid gap-4 md:grid-cols-3">
           <li className="rounded-xl bg-muted/50 p-6 text-center">
-            <Link href="/me" className="font-medium">
-              Saját posztok
+            <Link href="/posts" className="font-medium">
+              Bejegyzések
             </Link>
           </li>
           <li className="rounded-xl bg-muted/50 p-6 text-center">
-            <Link href="/write" className="font-medium text-accent">
+            <Link href="/posts/write" className="font-medium text-accent">
               Új írás
             </Link>
           </li>

@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { getSessionFromCookie } from "@/utils/auth";
-import PostForm from "@/components/blog/post-form";
+import NewPostForm from "@/components/new-post-form";
 
 export default async function Page() {
   const session = await getSessionFromCookie();
@@ -9,7 +9,7 @@ export default async function Page() {
   }
   return (
     <main className="container mx-auto py-6">
-      <PostForm />
+      <NewPostForm />
     </main>
   );
 }
