@@ -5,6 +5,7 @@ import { useIntersectionObserver } from "usehooks-ts";
 import TagHighlight from "@/components/tag-highlight";
 import CategoryBadge from "@/components/category-badge";
 import Link from "next/link";
+import { generateSlug } from "@/utils/slugify";
 
 interface Post {
   id: string;
@@ -69,7 +70,11 @@ export function BlogFeed() {
       {posts.map((p) => (
         <article key={p.id} className="border-b pb-4">
           <h2 className="text-xl font-bold">
-            <Link href={`/blog/post/${p.id}`} className="hover:underline">
+            <Link
+              href={`/blog/post/${generateSlug(p.title || p.id)}`}
+              prefetch={false}
+              className="hover:underline"
+            >
               {p.title}
             </Link>
           </h2>
@@ -87,7 +92,11 @@ export function BlogFeed() {
           <p className="mt-2 text-sm leading-relaxed prose dark:prose-invert">
             <TagHighlight text={truncate(p.content, 300)} sourceId={p.id} />
           </p>
-          <Link href={`/blog/post/${p.id}`} className="text-sm text-primary hover:underline">
+          <Link
+            href={`/blog/post/${generateSlug(p.title || p.id)}`}
+            prefetch={false}
+            className="text-sm text-primary hover:underline"
+          >
             Bővebben
           </Link>
         </article>
