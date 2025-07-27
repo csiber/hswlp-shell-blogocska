@@ -19,30 +19,47 @@ export function BlogFeed() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { ref: loaderRef, entry } = useIntersectionObserver({});
 
-  const loadPosts = async (pageNum: number) => {
-    const res = await fetch(`/api/blog/feed?page=${pageNum}&limit=10`);
-    const data: { posts?: Post[] } = await res.json();
-    if (data.posts?.length) {
-      setPosts((p) => [...p, ...(data.posts ?? [])]);
-      if (data.posts.length < 10) setHasMore(false);
-    } else {
-      setHasMore(false);
+  const loadPosts = async () => {
+    if (loading) return;
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/blog/feed?page=${page}&limit=10`)
+
+      if (!res.ok) {
+        console.error('Failed to fetch posts', res.status)
+        setHasMore(false)
+        return
+      }
+
+      const data: { posts?: Post[] } = await res.json()
+
+      if (data.posts?.length) {
+        setPosts((p) => [...p, ...(data.posts ?? [])])
+        setPage((prev) => prev + 1)
+        if (data.posts.length < 10) setHasMore(false)
+      } else {
+        setHasMore(false)
+      }
+    } catch (err) {
+      console.error('Failed to load posts', err)
+      setHasMore(false)
+    } finally {
+      setLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
-    loadPosts(1);
-    setPage(2);
+    loadPosts();
   }, []);
 
   useEffect(() => {
     if (entry?.isIntersecting && hasMore) {
-      loadPosts(page);
-      setPage((p) => p + 1);
+      loadPosts();
     }
-  }, [entry, hasMore, page]);
+  }, [entry, hasMore]);
 
   const truncate = (str: string, n: number) =>
     str.length > n ? str.slice(0, n - 1) + "…" : str;
