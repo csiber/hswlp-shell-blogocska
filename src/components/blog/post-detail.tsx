@@ -1,4 +1,3 @@
-import { SITE_URL } from "@/constants";
 import CategoryBadge from "@/components/category-badge";
 import MarkdownViewer from "@/components/markdown-viewer";
 import ReadRewardTracker from "@/components/read-reward-tracker";
@@ -17,7 +16,7 @@ interface PostDetailProps {
 }
 
 export default async function PostDetail({ id }: PostDetailProps) {
-  const res = await fetch(`${SITE_URL}/api/blog/${id}`, { cache: "no-store" });
+  const res = await fetch(`/api/blog/${id}`, { cache: "no-store" });
   if (!res.ok) {
     throw new Error("Failed to fetch post");
   }

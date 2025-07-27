@@ -1,4 +1,3 @@
-import { SITE_URL } from "@/constants";
 import { getSessionFromCookie } from "@/utils/auth";
 import PostEditForm from "@/components/blog/post-edit-form";
 import { redirect } from "next/navigation";
@@ -22,7 +21,7 @@ export default async function Page({ params }: EditPageProps) {
     redirect("/sign-in");
   }
   const { id } = await params;
-  const res = await fetch(`${SITE_URL}/api/blog/${id}`, { cache: "no-store" });
+  const res = await fetch(`/api/blog/${id}`, { cache: "no-store" });
   if (!res.ok) {
     throw new Error("Failed to fetch post");
   }
