@@ -1,7 +1,7 @@
 import "server-only";
 
 import { getBlogDB } from "@/db";
-import { postsTable } from "@/db/schema";
+import { postsTable, POST_STATUS } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { generateSlug } from "@/utils/slugify";
 
@@ -27,4 +27,17 @@ export async function getPostBySlug(slug: string): Promise<{ id: string } | unde
     return { id: match.id };
   }
   return undefined;
+}
+
+/**
+ * Return all approved posts with their slug generated from the title.
+ */
+export async function getAllApprovedPosts(): Promise<{ slug: string }[]> {
+  const db = getBlogDB();
+  const posts = await db
+    .select({ title: postsTable.title })
+    .from(postsTable)
+    .where(eq(postsTable.status, POST_STATUS.APPROVED));
+
+  return posts.map((p) => ({ slug: generateSlug(p.title || "untitled") }));
 }
