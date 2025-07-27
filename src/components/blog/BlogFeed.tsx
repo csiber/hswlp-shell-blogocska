@@ -22,15 +22,28 @@ export function BlogFeed() {
   const { ref: loaderRef, entry } = useIntersectionObserver({});
 
   const loadPosts = async (pageNum: number) => {
-    const res = await fetch(`/api/blog/feed?page=${pageNum}&limit=10`);
-    const data: { posts?: Post[] } = await res.json();
-    if (data.posts?.length) {
-      setPosts((p) => [...p, ...(data.posts ?? [])]);
-      if (data.posts.length < 10) setHasMore(false);
-    } else {
-      setHasMore(false);
+    try {
+      const res = await fetch(`/api/blog/feed?page=${pageNum}&limit=10`)
+
+      if (!res.ok) {
+        console.error('Failed to fetch posts', res.status)
+        setHasMore(false)
+        return
+      }
+
+      const data: { posts?: Post[] } = await res.json()
+
+      if (data.posts?.length) {
+        setPosts((p) => [...p, ...(data.posts ?? [])])
+        if (data.posts.length < 10) setHasMore(false)
+      } else {
+        setHasMore(false)
+      }
+    } catch (err) {
+      console.error('Failed to load posts', err)
+      setHasMore(false)
     }
-  };
+  }
 
   useEffect(() => {
     loadPosts(1);
