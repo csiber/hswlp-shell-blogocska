@@ -140,9 +140,7 @@ export default async function RanglistaPage() {
               <TableBody>
                 {topPosts.map((p) => (
                   <TableRow key={p.id}>
-                    <TableCell>
-                      <Link href={`/blog/post/${p.id}`}>{p.title}</Link>
-                    </TableCell>
+                    <TableCell>{p.title}</TableCell>
                     <TableCell>{p.authorName}</TableCell>
                     <TableCell className="text-right">{p.reads}</TableCell>
                   </TableRow>
@@ -219,9 +217,7 @@ export default async function RanglistaPage() {
                 {latestReads.map((r) => (
                   <TableRow key={`${r.userId}-${r.postId}-${r.createdAt.toISOString()}`}>
                     <TableCell>{r.userName}</TableCell>
-                    <TableCell>
-                      <Link href={`/blog/post/${r.postId}`}>{r.title}</Link>
-                    </TableCell>
+                    <TableCell>{r.title}</TableCell>
                     <TableCell className="text-right">
                       {formatDistanceToNow(new Date(r.createdAt), { addSuffix: true })}
                     </TableCell>

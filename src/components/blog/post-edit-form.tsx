@@ -90,7 +90,7 @@ export function PostEditForm({ post }: { post: Post }) {
     });
     const json: { success?: boolean; error?: string } = await res.json();
     if (res.ok) {
-      router.push(`/blog/post/${post.id}`);
+      router.push("/");
     } else {
       toast.error(json.error || "Hiba történt");
     }
