@@ -1,6 +1,8 @@
 import PostDetail from "@/components/blog/post-detail";
 import NotFoundComponent from "@/components/blog/not-found-component";
-import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { getBlogDB } from "@/db";
+import { postsTable } from "@/db/schema";
+import { eq } from "drizzle-orm";
 
 interface PostPageProps {
   params: Promise<{
@@ -11,14 +13,13 @@ interface PostPageProps {
 export default async function Page({ params }: PostPageProps) {
   const { id } = await params;
 
-  let post: { id: string } | null = null;
+  let post: { id: string } | undefined = undefined;
   try {
-    const { env } = getCloudflareContext();
-    post = await env.DB.prepare(
-      `SELECT id FROM posts WHERE id = ?`
-    )
-      .bind(id)
-      .first<{ id: string }>();
+    const db = getBlogDB();
+    post = await db.query.postsTable.findFirst({
+      where: eq(postsTable.id, id),
+      columns: { id: true },
+    });
   } catch (err) {
     console.error("Failed to load post", err);
   }
