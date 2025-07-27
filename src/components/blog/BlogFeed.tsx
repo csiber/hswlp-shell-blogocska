@@ -2,10 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useIntersectionObserver } from "usehooks-ts";
-import TagHighlight from "@/components/tag-highlight";
 import CategoryBadge from "@/components/category-badge";
-import Link from "next/link";
-import { generateSlug } from "@/utils/slugify";
+import MarkdownViewer from "@/components/markdown-viewer";
 
 interface Post {
   id: string;
@@ -62,22 +60,11 @@ export function BlogFeed() {
     }
   }, [entry, hasMore]);
 
-  const truncate = (str: string, n: number) =>
-    str.length > n ? str.slice(0, n - 1) + "…" : str;
-
   return (
     <div className="space-y-6">
       {posts.map((p) => (
         <article key={p.id} className="border-b pb-4">
-          <h2 className="text-xl font-bold">
-            <Link
-              href={`/blog/post/${generateSlug(p.title || p.id)}`}
-              prefetch={false}
-              className="hover:underline"
-            >
-              {p.title}
-            </Link>
-          </h2>
+          <h2 className="text-xl font-bold">{p.title}</h2>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span className="font-semibold text-primary">{p.authorName}</span>
             <CategoryBadge name={p.category} />
@@ -89,16 +76,9 @@ export function BlogFeed() {
               className="my-2 max-h-60 w-full rounded-md object-cover"
             />
           )}
-          <p className="mt-2 text-sm leading-relaxed prose dark:prose-invert">
-            <TagHighlight text={truncate(p.content, 300)} sourceId={p.id} />
-          </p>
-          <Link
-            href={`/blog/post/${generateSlug(p.title || p.id)}`}
-            prefetch={false}
-            className="text-sm text-primary hover:underline"
-          >
-            Bővebben
-          </Link>
+          <div className="mt-2 text-sm leading-relaxed prose dark:prose-invert">
+            <MarkdownViewer content={p.content} postId={p.id} />
+          </div>
         </article>
       ))}
       {hasMore && <div ref={loaderRef} className="h-10" />}
