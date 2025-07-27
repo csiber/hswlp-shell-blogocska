@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useIntersectionObserver } from "usehooks-ts";
 import TagHighlight from "@/components/tag-highlight";
 import CategoryBadge from "@/components/category-badge";
+import Link from "next/link";
 
 interface Post {
   id: string;
@@ -50,7 +51,11 @@ export function BlogFeed() {
     <div className="space-y-6">
       {posts.map((p) => (
         <article key={p.id} className="border-b pb-4">
-          <h2 className="text-xl font-bold">{p.title}</h2>
+          <h2 className="text-xl font-bold">
+            <Link href={`/blog/post/${p.id}`} className="hover:underline">
+              {p.title}
+            </Link>
+          </h2>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span className="font-semibold text-primary">{p.authorName}</span>
             <CategoryBadge name={p.category} />
@@ -65,6 +70,9 @@ export function BlogFeed() {
           <p className="mt-2 text-sm leading-relaxed prose dark:prose-invert">
             <TagHighlight text={truncate(p.content, 300)} sourceId={p.id} />
           </p>
+          <Link href={`/blog/post/${p.id}`} className="text-sm text-primary hover:underline">
+            Bővebben
+          </Link>
         </article>
       ))}
       {hasMore && <div ref={loaderRef} className="h-10" />}
