@@ -5,10 +5,6 @@ import { getBlogDB } from "@/db";
 import { postsTable, POST_STATUS } from "@/db/schema";
 import { generateSlug } from "@/utils/slugify";
 
-interface PostPageProps {
-  params: { slug: string };
-}
-
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 export const revalidate = 0;
@@ -20,14 +16,15 @@ export async function generateStaticParams() {
     .from(postsTable);
 
   return posts
-    .filter(p => p.status === POST_STATUS.APPROVED)
-    .map((post) => ({ slug: generateSlug(post.title || post.id) }));
+    .filter(p => p.status === POST_STATUS.APPROVED && p.title)
+    .map((post) => ({
+      slug: generateSlug(post.title ?? "untitled"),
+    }));
 }
 
-export default async function Page({ params }: PostPageProps) {
-  const slug = params.slug;
-
-  const result = await getPostBySlug(decodeURIComponent(slug));
+export default async function Page({ params }: { params: { slug: string } }) {
+  const slug = decodeURIComponent(params.slug);
+  const result = await getPostBySlug(slug);
 
   if (!result) {
     notFound();
