@@ -24,7 +24,7 @@ export default async function PostDetail({ id }: PostDetailProps) {
   const post: Post = await res.json();
 
   return (
-    <article className="prose mx-auto dark:prose-invert">
+    <article className="prose mx-auto dark:prose-invert rounded-md border border-border bg-card shadow p-6">
       <h1>{post.title}</h1>
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <span>{post.authorName}</span>
