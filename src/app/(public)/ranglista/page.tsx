@@ -25,6 +25,7 @@ import { getUserDisplayName } from "@/utils/user";
 import { getInitials } from "@/utils/name-initials";
 import { getSessionFromCookie } from "@/utils/auth";
 import { formatDistanceToNow } from "date-fns";
+import { normalizeTimestamp } from "@/utils/normalize-timestamp";
 
 export const metadata = {
   title: "Blogocska – Álmaid naplója",
@@ -113,6 +114,7 @@ export default async function RanglistaPage() {
   const latestReads = await Promise.all(
     latestReadsRaw.map(async (r) => ({
       ...r,
+      createdAt: normalizeTimestamp(r.createdAt),
       userName: await getUserDisplayName(r.userId),
     }))
   );
