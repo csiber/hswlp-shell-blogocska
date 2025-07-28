@@ -58,7 +58,7 @@ export default function BaseLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className="font-serif">
+      <body className="font-serif motion-safe:animate-fade-in">
         <NextTopLoader
           initialPosition={0.15}
           shadow="0 0 10px #000, 0 0 5px #000"
