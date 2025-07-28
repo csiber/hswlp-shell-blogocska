@@ -219,7 +219,7 @@ export default async function RanglistaPage() {
               </TableHeader>
               <TableBody>
                 {latestReads.map((r) => (
-                  <TableRow key={`${r.userId}-${r.postId}-${r.createdAt.toISOString()}`}>
+                  <TableRow key={`${r.userId}-${r.postId}-${new Date(r.createdAt).toISOString()}`}>
                     <TableCell>{r.userName}</TableCell>
                     <TableCell>
                       <Link href={`/blog/post/${r.postId}`}>{r.title}</Link>
