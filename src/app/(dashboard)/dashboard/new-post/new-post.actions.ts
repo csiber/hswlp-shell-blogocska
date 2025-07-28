@@ -33,7 +33,7 @@ export const createPostAction = createServerAction()
         input.title,
         input.content,
         input.category,
-        'active',
+        'approved',
         null,
         now,
         now,
