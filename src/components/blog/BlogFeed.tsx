@@ -65,7 +65,7 @@ export function BlogFeed() {
           )}
           <MarkdownViewer
             content={p.content}
-            className="mt-2 text-sm leading-relaxed prose"
+            className="mt-2 text-sm leading-relaxed prose dark:text-white"
             postId={p.id}
           />
         </motion.article>

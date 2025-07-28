@@ -3,7 +3,7 @@
 import Link from "next/link"
 import type { Route } from 'next'
 import { usePathname } from "next/navigation"
-import { ComponentIcon, Menu } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useSessionStore } from "@/state/session"
@@ -62,7 +62,7 @@ export function Navigation() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="text-xl md:text-2xl font-bold text-primary flex items-center gap-2 md:gap-3">
-              <ComponentIcon className="w-6 h-6 md:w-7 md:h-7" />
+              <img src="/favicon.svg" alt="Logo" className="w-6 h-6 md:w-7 md:h-7" />
               {SITE_NAME}
             </Link>
           </div>

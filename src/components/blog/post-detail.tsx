@@ -24,7 +24,7 @@ export default async function PostDetail({ id }: PostDetailProps) {
   const post: Post = await res.json();
 
   return (
-    <article className="prose mx-auto dark:prose-invert rounded-md border border-border bg-card shadow p-6">
+    <article className="prose mx-auto dark:prose-invert dark:text-white rounded-md border border-border bg-card shadow p-6">
       <h1 className="text-2xl md:text-3xl font-bold text-white">{post.title}</h1>
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <span>{post.authorName}</span>
@@ -33,7 +33,7 @@ export default async function PostDetail({ id }: PostDetailProps) {
       {post.imageUrl && (
         <img src={post.imageUrl} alt="" className="my-4 rounded-md" />
       )}
-      <MarkdownViewer content={post.content} className="mt-4 prose leading-relaxed" postId={post.id} />
+      <MarkdownViewer content={post.content} className="mt-4 prose leading-relaxed dark:text-white" postId={post.id} />
       <ReadRewardTracker postId={post.id} />
     </article>
   );
