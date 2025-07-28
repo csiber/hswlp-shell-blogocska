@@ -3,7 +3,6 @@
 ## 🔥 Első hullám – Alap pluginok
 
 - [x] Fork sablon `hswlp-next-cf`
-- [ ] Stripe átalakítás bundle támogatásra
 - [ ] `PluginCenter` oldal scaffold
 - [ ] D1 seed fájl kitöltése
 

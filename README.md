@@ -8,7 +8,6 @@ Ez az alap biztosítja a következőket:
 - Turnstile captcha
 - Cloudflare D1 adatbázis migrációkkal
 - R2 tárhely és KV session kezelés
-- Stripe integráció és emailküldés (Resend vagy Brevo)
 - Alkalmas Cloudflare Pages és Edge funkciók kiszolgálására
 
 ---
