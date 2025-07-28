@@ -8,6 +8,7 @@ import { useServerAction } from "zsa-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import UploadBox from "@/components/ui/upload-box";
 import {
   Form,
   FormField,
@@ -85,6 +86,7 @@ export function NewPostForm() {
             </FormItem>
           )}
         />
+        <UploadBox className="mt-2" />
         <div className="flex justify-end">
           <Button type="submit">Save</Button>
         </div>
