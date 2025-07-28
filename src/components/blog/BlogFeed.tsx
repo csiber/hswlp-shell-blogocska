@@ -12,6 +12,7 @@ interface Post {
   content: string;
   authorName: string;
   category: string;
+  createdAt: number;
   imageUrl?: string | null;
 }
 
@@ -49,11 +50,18 @@ export function BlogFeed() {
       {posts.map((p) => (
         <motion.article
           key={p.id}
-          className="rounded-xl border bg-card text-card-foreground p-4 shadow transition hover:shadow-lg data-[visible]:animate-in data-[visible]:fade-in"
+          className="mx-auto max-w-3xl rounded-xl border bg-muted dark:bg-zinc-900 text-card-foreground p-6 shadow transition hover:shadow-lg data-[visible]:animate-in data-[visible]:fade-in"
         >
           <h2 className="text-xl font-bold">{p.title}</h2>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span className="font-semibold text-primary">{p.authorName}</span>
+            <time dateTime={new Date(p.createdAt).toISOString()}>
+              {new Date(p.createdAt).toLocaleDateString("hu-HU", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </time>
             <CategoryBadge name={p.category} />
           </div>
           {p.imageUrl && (
@@ -68,6 +76,14 @@ export function BlogFeed() {
             className="mt-2 text-sm leading-relaxed prose dark:text-white"
             postId={p.id}
           />
+          {p.content.length > 300 && (
+            <a
+              href={`/blog/post/${p.id}`}
+              className="mt-4 inline-block text-primary underline"
+            >
+              Tovább
+            </a>
+          )}
         </motion.article>
       ))}
       {hasMore && <div ref={loaderRef} className="h-10" />}
