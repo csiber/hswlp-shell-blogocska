@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getBlogDB } from '@/db'
 import { postsTable, postCategoryTable } from '@/db/schema'
+import { normalizeTimestamp } from '@/utils/normalize-timestamp'
 import { eq, desc } from 'drizzle-orm'
 import { getSessionFromCookie } from '@/utils/auth'
 
@@ -41,5 +42,15 @@ export async function GET(
     .limit(limit)
     .offset(offset)
 
-  return NextResponse.json({ posts })
+  const transformed = posts.map(p => ({
+    id: p.id,
+    title: p.title,
+    content: p.content,
+    createdAt: normalizeTimestamp(p.created_at),
+    status: p.status,
+    imageUrl: p.image_url,
+    category: p.category_name,
+  }))
+
+  return NextResponse.json({ posts: transformed })
 }

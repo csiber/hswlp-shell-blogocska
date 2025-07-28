@@ -21,7 +21,7 @@ export const createPostAction = createServerAction()
 
     const id = crypto.randomUUID();
     const slug = generateSlug(input.title);
-    const now = Date.now();
+    const now = Math.floor(Date.now() / 1000);
 
     await env.DB.prepare(
       `INSERT INTO posts (id, user_id, title, content, category, status, image_url, created_at, updated_at, slug)

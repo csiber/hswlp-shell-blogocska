@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getBlogDB } from '@/db'
 import { postsTable, userTable, postCategoryTable, POST_STATUS } from '@/db/schema'
+import { normalizeTimestamp } from '@/utils/normalize-timestamp'
 import { eq, desc } from 'drizzle-orm'
 
 export async function GET(request: Request) {
@@ -36,7 +37,7 @@ export async function GET(request: Request) {
     title: p.title,
     content: p.content,
     imageUrl: p.image_url,
-    createdAt: p.created_at,
+    createdAt: normalizeTimestamp(p.created_at),
     authorName: p.author_nick || `${p.author_first || ''} ${p.author_last || ''}`.trim(),
     category: p.category_name,
   }))
