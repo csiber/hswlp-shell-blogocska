@@ -4,7 +4,7 @@
 
 - [x] Fork sablon `hswlp-next-cf`
 - [ ] `PluginCenter` oldal scaffold
-- [ ] D1 seed fájl kitöltése
+- [x] D1 seed fájl kitöltése
 
 ## 🌐 CF Workers API
 
