@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ENV_FILE=".env"
-WORKER_NAME="hswlp-next"
+WORKER_NAME="hswlp-shell-blogocska"
 
 if [ ! -f "$ENV_FILE" ]; then
   echo "❌ .env file not found"

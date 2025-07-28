@@ -1,12 +1,12 @@
 {
-  "name": "hswlp-next",
-  "version": "0.1.0",
+  "name": "hswlp-shell-blogocska",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-  "build": "next build",
-  "opennext:build": "opennextjs-cloudflare build",
-  "deploy": "pnpm run opennext:build && wrangler deploy",
+    "build": "next build",
+    "opennext:build": "opennextjs-cloudflare build",
+    "deploy": "pnpm run opennext:build && wrangler deploy",
     "build:prod": "pnpm run opennext:build && wrangler deploy --dry-run --outdir=dist",
     "build:analyze": "ANALYZE=true next build",
     "start": "next start",
