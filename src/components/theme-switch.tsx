@@ -5,6 +5,7 @@ import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,7 +24,14 @@ export default function ThemeSwitch({ children, className }: ThemeSwitchProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size={children ? "default" : "icon"} className={className}>
+        <Button
+          variant="outline"
+          size={children ? "default" : "icon"}
+          className={cn(
+            "dark:border-[#2c2c2e] dark:bg-[#1c1c1e] dark:text-foreground",
+            className
+          )}
+        >
           <div className="relative flex items-center">
             <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
