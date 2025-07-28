@@ -1,28 +1,28 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import type { Route } from 'next'
-import { usePathname } from "next/navigation"
-import { Menu } from 'lucide-react'
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { useSessionStore } from "@/state/session"
-import { cn } from "@/lib/utils"
-import { useNavStore } from "@/state/nav"
-import { Skeleton } from "@/components/ui/skeleton"
-import { SITE_NAME } from "@/constants"
+import Link from "next/link";
+import type { Route } from "next";
+import { usePathname } from "next/navigation";
+import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useSessionStore } from "@/state/session";
+import { cn } from "@/lib/utils";
+import { useNavStore } from "@/state/nav";
+import { Skeleton } from "@/components/ui/skeleton";
+import { SITE_NAME } from "@/constants";
 
 type NavItem = {
   name: string;
   href: Route;
-}
+};
 
 const ActionButtons = () => {
-  const { session, isLoading } = useSessionStore()
-  const { setIsOpen } = useNavStore()
+  const { session, isLoading } = useSessionStore();
+  const { setIsOpen } = useNavStore();
 
   if (isLoading) {
-    return <Skeleton className="h-10 w-[80px] bg-primary" />
+    return <Skeleton className="h-10 w-[80px] bg-primary" />;
   }
 
   if (session) {
@@ -33,36 +33,42 @@ const ActionButtons = () => {
     <Button asChild onClick={() => setIsOpen(false)}>
       <Link href="/sign-in">Bejelentkezés</Link>
     </Button>
-  )
-}
+  );
+};
 
 export function Navigation() {
-  const { session, isLoading } = useSessionStore()
-  const { isOpen, setIsOpen } = useNavStore()
-  const pathname = usePathname()
+  const { session, isLoading } = useSessionStore();
+  const { isOpen, setIsOpen } = useNavStore();
+  const pathname = usePathname();
 
   const navItems: NavItem[] = [
     { name: "Főoldal", href: "/" },
     { name: "Ranglista", href: "/ranglista" },
-    ...(session ? [
-      { name: "Saját posztok", href: "/me" },
-    ] as NavItem[] : []),
-  ]
+    { name: "Vezérlőpult", href: "/dashboard" },
+    ...(session ? ([{ name: "Saját posztok", href: "/me" }] as NavItem[]) : []),
+  ];
 
   const isActiveLink = (itemHref: string) => {
     if (itemHref === "/") {
-      return pathname === "/"
+      return pathname === "/";
     }
-    return pathname === itemHref || pathname.startsWith(`${itemHref}/`)
-  }
+    return pathname === itemHref || pathname.startsWith(`${itemHref}/`);
+  };
 
   return (
     <nav className="border-b border-border bg-muted/60 dark:bg-[#181a1f] dark:border-[#2c2c2e] shadow z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-xl md:text-2xl font-bold text-primary flex items-center gap-2 md:gap-3">
-              <img src="/favicon.svg" alt="Logo" className="w-6 h-6 md:w-7 md:h-7" />
+            <Link
+              href="/"
+              className="text-xl md:text-2xl font-bold text-primary flex items-center gap-2 md:gap-3"
+            >
+              <img
+                src="/favicon.svg"
+                alt="Logo"
+                className="w-6 h-6 md:w-7 md:h-7"
+              />
               {SITE_NAME}
             </Link>
           </div>
@@ -81,7 +87,8 @@ export function Navigation() {
                     href={item.href}
                     className={cn(
                       "text-muted-foreground hover:text-foreground no-underline px-3 h-16 flex items-center text-sm font-medium transition-colors relative",
-                      isActiveLink(item.href) && "text-foreground after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-foreground"
+                      isActiveLink(item.href) &&
+                        "text-foreground after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-foreground",
                     )}
                   >
                     {item.name}
@@ -116,7 +123,7 @@ export function Navigation() {
                             href={item.href}
                             className={cn(
                               "block px-3 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 no-underline transition-colors relative",
-                              isActiveLink(item.href) && "text-foreground"
+                              isActiveLink(item.href) && "text-foreground",
                             )}
                             onClick={() => setIsOpen(false)}
                           >
@@ -136,6 +143,5 @@ export function Navigation() {
         </div>
       </div>
     </nav>
-  )
+  );
 }
-
