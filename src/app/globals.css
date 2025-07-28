@@ -61,11 +61,11 @@
     --sidebar-ring: var(--ring);
   }
   .dark {
-    --background: 216 28% 7%;
-    --foreground: 0 0% 88%;
-    --card: 240 3% 11%;
+    --background: 220 17% 7%;
+    --foreground: 0 0% 96%;
+    --card: 240 6% 13%;
     --card-foreground: 0 0% 88%;
-    --popover: 240 3% 11%;
+    --popover: 240 6% 13%;
     --popover-foreground: 0 0% 88%;
     --primary: 0 0% 98%;
     --primary-foreground: 240 5.9% 10%;
@@ -93,8 +93,8 @@
     --sidebar-accent-foreground: var(--accent-foreground);
     --sidebar-border: var(--border);
     --sidebar-ring: var(--ring);
-    --link: 212 100% 67%;
-    --link-hover: 212 100% 80%;
+    --link: 208 100% 74%;
+    --link-hover: 208 100% 83%;
   }
 }
 
@@ -103,10 +103,7 @@
     @apply border-border;
   }
   body {
-    @apply min-h-screen bg-gradient-to-br from-background to-secondary text-foreground antialiased transition-colors duration-300;
-  }
-  html.dark body {
-    @apply bg-gradient-to-br from-background to-primary;
+    @apply min-h-screen bg-background text-foreground antialiased transition-colors duration-300;
   }
 
   a {
