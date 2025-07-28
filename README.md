@@ -1,5 +1,15 @@
 # HSWLP:Next – Cloudflare alapú újgenerációs SaaS rendszer
 
+## Blogocska shell
+
+Ez a repository tartalmazza a **Blogocska** alkalmazást, amely egy egyszerű blogfelület Cloudflare Workers környezetben. A frontend Next.js alapokra épül, a háttérben pedig D1 adatbázist és R2 tárhelyet használ.
+
+Fő funkciók:
+
+- Bejegyzések létrehozása és megjelenítése
+- Felhasználói hitelesítés JWT alapon
+- Teljesen szerver nélküli működés
+
 Ez a repository a HSWLP platform `hswlp-next` nevű **új alaprendszere**, amelyre a különböző frontend rétegek (ún. **shellek**) épülnek. A rendszer teljesen Cloudflare-infrastruktúrán fut (Workers, D1, R2, KV), és készen áll SaaS alkalmazások hosztolására – külön back-end nélkül.
 
 Ez az alap biztosítja a következőket:
