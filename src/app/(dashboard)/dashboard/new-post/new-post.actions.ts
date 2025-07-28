@@ -10,6 +10,9 @@ export const createPostAction = createServerAction()
   .input(newPostSchema)
   .handler(async ({ input }) => {
     const session = await requireAdmin({ doNotThrowError: false });
+    if (!session?.user?.id) {
+      throw new ZSAError("NOT_AUTHORIZED", "Unauthorized");
+    }
 
     const { env } = getCloudflareContext();
     if (!env.DB) {
