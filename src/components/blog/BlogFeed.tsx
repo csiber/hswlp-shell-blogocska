@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useIntersectionObserver } from "usehooks-ts";
-import TagHighlight from "@/components/tag-highlight";
+import { motion } from "motion/react";
+import MarkdownViewer from "@/components/markdown-viewer";
 import CategoryBadge from "@/components/category-badge";
 
 interface Post {
@@ -43,13 +44,13 @@ export function BlogFeed() {
     }
   }, [entry, hasMore, page]);
 
-  const truncate = (str: string, n: number) =>
-    str.length > n ? str.slice(0, n - 1) + "…" : str;
-
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {posts.map((p) => (
-        <article key={p.id} className="border-b pb-4">
+        <motion.article
+          key={p.id}
+          className="rounded-xl border bg-card p-4 shadow transition hover:shadow-lg data-[visible]:animate-in data-[visible]:fade-in"
+        >
           <h2 className="text-xl font-bold">{p.title}</h2>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span className="font-semibold text-primary">{p.authorName}</span>
@@ -62,10 +63,12 @@ export function BlogFeed() {
               className="my-2 max-h-60 w-full rounded-md object-cover"
             />
           )}
-          <p className="mt-2 text-sm leading-relaxed prose">
-            <TagHighlight text={truncate(p.content, 300)} sourceId={p.id} />
-          </p>
-        </article>
+          <MarkdownViewer
+            content={p.content}
+            className="mt-2 text-sm leading-relaxed prose"
+            postId={p.id}
+          />
+        </motion.article>
       ))}
       {hasMore && <div ref={loaderRef} className="h-10" />}
     </div>
