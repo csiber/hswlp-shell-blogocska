@@ -49,7 +49,10 @@ export function BlogFeed() {
   return (
     <div className="space-y-6">
       {posts.map((p) => (
-        <article key={p.id} className="border-b pb-4">
+        <article
+          key={p.id}
+          className="rounded-md border border-border bg-card shadow-sm p-4"
+        >
           <h2 className="text-xl font-bold">{p.title}</h2>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span className="font-semibold text-primary">{p.authorName}</span>

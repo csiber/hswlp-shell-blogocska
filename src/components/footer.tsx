@@ -5,7 +5,7 @@ import { SITE_NAME } from "@/constants";
 
 export function Footer() {
   return (
-    <footer className="border-t dark:bg-muted/30 bg-muted/60 shadow">
+    <footer className="border-t border-border bg-muted/60 dark:bg-[#1a1a1d] dark:border-[#2c2c2e] shadow">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="py-6 md:py-8">
           {/* Responsive grid with better mobile spacing */}

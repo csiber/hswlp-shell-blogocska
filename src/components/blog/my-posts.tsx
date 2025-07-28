@@ -28,7 +28,10 @@ export function MyPosts() {
   return (
     <div className="space-y-4">
       {posts.map((p) => (
-        <div key={p.id} className="border-b pb-2">
+        <div
+          key={p.id}
+          className="rounded-md border border-border bg-card shadow-sm p-4"
+        >
           <h3 className="font-medium">{p.title}</h3>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <CategoryBadge name={p.category_name} />
