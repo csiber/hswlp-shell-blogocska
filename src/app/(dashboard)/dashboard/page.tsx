@@ -1,7 +1,11 @@
-import Link from "next/link";
-import { PageHeader } from "@/components/page-header";
+import Link from "next/link"
+import { PageHeader } from "@/components/page-header"
+import { requireAdmin } from "@/utils/auth"
+import NewPostForm from "./new-post/new-post-form"
 
-export default function Page() {
+export default async function Page() {
+  const session = await requireAdmin({ doNotThrowError: true })
+
   return (
     <>
       <PageHeader
@@ -19,13 +23,17 @@ export default function Page() {
               Saját posztok
             </Link>
           </li>
-          <li className="rounded-xl bg-muted/50 p-6 text-center">
-            <span className="font-medium text-muted-foreground">
-              Írás funkció nem elérhető
-            </span>
+          <li className="rounded-xl bg-muted/50 p-6">
+            {session ? (
+              <NewPostForm />
+            ) : (
+              <span className="font-medium text-muted-foreground">
+                Írás funkció nem elérhető
+              </span>
+            )}
           </li>
         </ul>
       </div>
     </>
-  );
+  )
 }
