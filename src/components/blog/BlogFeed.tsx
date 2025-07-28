@@ -49,7 +49,7 @@ export function BlogFeed() {
       {posts.map((p) => (
         <motion.article
           key={p.id}
-          className="rounded-xl border bg-card p-4 shadow transition hover:shadow-lg data-[visible]:animate-in data-[visible]:fade-in"
+          className="rounded-xl border bg-card text-card-foreground p-4 shadow transition hover:shadow-lg data-[visible]:animate-in data-[visible]:fade-in"
         >
           <h2 className="text-xl font-bold">{p.title}</h2>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">

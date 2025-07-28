@@ -30,7 +30,7 @@ export function MyPosts() {
       {posts.map((p) => (
         <div
           key={p.id}
-          className="rounded-md border border-border bg-card shadow-sm p-4"
+          className="rounded-md border border-border bg-card text-card-foreground shadow-sm p-4"
         >
           <h3 className="font-medium">{p.title}</h3>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
