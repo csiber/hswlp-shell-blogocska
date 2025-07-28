@@ -36,7 +36,14 @@ export default function PrivacyPage() {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold text-foreground mb-4">4. Kapcsolat</h2>
+        <h2 className="text-2xl font-semibold text-foreground mb-4">4. Sütik</h2>
+        <p className="text-muted-foreground">
+          A webhely működéséhez elengedhetetlen sütiket használunk. Ezek a bejelentkezést és az analitikát segítik. A szolgáltatás további használatával elfogadod a sütik használatát.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold text-foreground mb-4">5. Kapcsolat</h2>
         <p className="text-muted-foreground">
           Kérdés esetén írj a <code>privacy@hswlp.hu</code> címre.
         </p>

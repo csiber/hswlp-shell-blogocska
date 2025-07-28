@@ -8,6 +8,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NextTopLoader from 'nextjs-toploader'
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/constants";
 import { AgenticDevStudioStickyBanner } from "@/components/startup-studio-sticky-banner";
+import CookieBanner from "@/components/cookie-banner";
 
 export const dynamic = "force-dynamic";
 
@@ -54,9 +55,12 @@ export default function BaseLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className="font-serif motion-safe:animate-fade-in">
         <NextTopLoader
@@ -78,6 +82,7 @@ export default function BaseLayout({
         </ThemeProvider>
         <Toaster richColors closeButton position="top-right" expand duration={7000} />
         <AgenticDevStudioStickyBanner />
+        <CookieBanner />
       </body>
     </html>
   );
