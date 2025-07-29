@@ -1,6 +1,6 @@
 import type { Route } from "next"
 
-export const SITE_NAME = "Blogocska"
+export const SITE_NAME = "🧩 HSWLP Blogocska"
 export const SITE_DESCRIPTION =
   "Álmaid naplója"
 export const SITE_URL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://blogocska.hu/"
