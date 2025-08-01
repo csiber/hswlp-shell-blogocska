@@ -72,14 +72,14 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "blogocska-d1",
-      "database_id": "22a578d0-3d9d-4b7a-9379-b96b493febd8",
+      "database_name": "hswlp-d1",
+      "database_id": "f81305ef-3fa9-40d5-a3ab-6ca18e568d9e",
       "migrations_dir": "src/db/migrations"
     },
     {
       "binding": "NEXT_TAG_CACHE_D1",
-      "database_name": "blogocska-d1",
-      "database_id": "22a578d0-3d9d-4b7a-9379-b96b493febd8"
+      "database_name": "hswlp-d1",
+      "database_id": "f81305ef-3fa9-40d5-a3ab-6ca18e568d9e"
     }
   ],
   "kv_namespaces": [
