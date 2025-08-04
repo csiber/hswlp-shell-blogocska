@@ -33,3 +33,13 @@ export interface SessionWithMeta extends KVSession {
   userAgent?: string | null;
   parsedUserAgent?: ParsedUserAgent;
 }
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  content: string;
+  authorName: string;
+  category: string;
+  createdAt: number;
+  imageUrl?: string | null;
+}

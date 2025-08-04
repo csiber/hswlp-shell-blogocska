@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import type { Route } from "next";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
@@ -65,10 +66,13 @@ export function Navigation() {
               href="/"
               className="text-xl md:text-2xl font-bold text-primary flex items-center gap-2 md:gap-3"
             >
-              <img
+              <Image
                 src="/favicon.svg"
                 alt="Logo"
+                width={28}
+                height={28}
                 className="w-6 h-6 md:w-7 md:h-7"
+                priority
               />
               {SITE_NAME}
             </Link>

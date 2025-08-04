@@ -2,15 +2,8 @@ import { SITE_URL } from "@/constants";
 import CategoryBadge from "@/components/category-badge";
 import MarkdownViewer from "@/components/markdown-viewer";
 import ReadRewardTracker from "@/components/read-reward-tracker";
-
-interface Post {
-  id: string;
-  title: string;
-  content: string;
-  authorName: string;
-  category: string;
-  imageUrl?: string | null;
-}
+import Image from "next/image";
+import type { BlogPost } from "@/types";
 
 interface PostDetailProps {
   id: string;
@@ -21,7 +14,7 @@ export default async function PostDetail({ id }: PostDetailProps) {
   if (!res.ok) {
     throw new Error("Failed to fetch post");
   }
-  const post: Post = await res.json();
+  const post: BlogPost = await res.json();
 
   return (
     <article className="prose mx-auto dark:prose-invert dark:text-white rounded-md border border-border bg-card shadow p-6">
@@ -31,7 +24,14 @@ export default async function PostDetail({ id }: PostDetailProps) {
         <CategoryBadge name={post.category} />
       </div>
       {post.imageUrl && (
-        <img src={post.imageUrl} alt="" className="my-4 rounded-md" />
+        <Image
+          src={post.imageUrl}
+          alt=""
+          width={800}
+          height={400}
+          className="my-4 rounded-md"
+          unoptimized
+        />
       )}
       <MarkdownViewer content={post.content} className="mt-4 prose leading-relaxed dark:text-white" postId={post.id} />
       <ReadRewardTracker postId={post.id} />
