@@ -1,6 +1,7 @@
 import BlogFeed from "@/components/blog/BlogFeed";
 import NavFooterLayout from "@/layouts/NavFooterLayout";
 import { SITE_URL } from "@/constants";
+import type { BlogPost } from "@/types";
 
 export default async function Page({
   searchParams,
@@ -13,8 +14,8 @@ export default async function Page({
     `${SITE_URL}/api/blog/feed?page=${currentPage}&limit=25`,
     { cache: "no-store" }
   );
-  const data: { posts?: unknown[] } = await res.json();
-  const posts = data.posts ?? [];
+  const data: { posts?: BlogPost[] } = await res.json();
+  const posts: BlogPost[] = data.posts ?? [];
   const hasNext = posts.length === 25;
 
   return (

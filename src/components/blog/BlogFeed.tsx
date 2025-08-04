@@ -2,28 +2,20 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "motion/react";
 import MarkdownViewer from "@/components/markdown-viewer";
 import CategoryBadge from "@/components/category-badge";
-
-interface Post {
-  id: string;
-  title: string;
-  content: string;
-  authorName: string;
-  category: string;
-  createdAt: number;
-  imageUrl?: string | null;
-}
+import type { BlogPost } from "@/types";
 
 interface BlogFeedProps {
-  initialPosts: Post[];
+  initialPosts: BlogPost[];
   page: number;
   hasNext: boolean;
 }
 
 export function BlogFeed({ initialPosts, page, hasNext }: BlogFeedProps) {
-  const [posts, setPosts] = useState<Post[]>(initialPosts);
+  const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
 
   useEffect(() => {
     setPosts(initialPosts);
@@ -49,10 +41,13 @@ export function BlogFeed({ initialPosts, page, hasNext }: BlogFeedProps) {
             <CategoryBadge name={p.category} />
           </div>
           {p.imageUrl && (
-            <img
+            <Image
               src={p.imageUrl}
               alt=""
+              width={800}
+              height={240}
               className="my-2 max-h-60 w-full rounded-md object-cover"
+              unoptimized
             />
           )}
           <MarkdownViewer

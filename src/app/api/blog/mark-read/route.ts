@@ -12,7 +12,8 @@ async function hashIp(ip: string) {
 }
 
 export async function POST(req: Request) {
-  const { post_id, duration_sec } = await req.json();
+  const { post_id, duration_sec }: { post_id: string; duration_sec: number } =
+    await req.json();
   const session = await getSessionFromCookie();
   if (!session?.user?.id) {
     return NextResponse.json({ ok: false }, { status: 401 });
