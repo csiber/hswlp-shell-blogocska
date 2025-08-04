@@ -9,6 +9,7 @@ import NextTopLoader from 'nextjs-toploader'
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/constants";
 import { AgenticDevStudioStickyBanner } from "@/components/startup-studio-sticky-banner";
 import CookieBanner from "@/components/cookie-banner";
+import AmbientBackground from "@/components/ambient-background";
 
 export const dynamic = "force-dynamic";
 
@@ -63,6 +64,7 @@ export default function BaseLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className="font-serif motion-safe:animate-fade-in">
+        <AmbientBackground />
         <NextTopLoader
           initialPosition={0.15}
           shadow="0 0 10px #000, 0 0 5px #000"

@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
-import { useIntersectionObserver } from "usehooks-ts";
+import Link from "next/link";
 import { motion } from "motion/react";
 import MarkdownViewer from "@/components/markdown-viewer";
 import CategoryBadge from "@/components/category-badge";
@@ -16,34 +16,18 @@ interface Post {
   imageUrl?: string | null;
 }
 
-export function BlogFeed() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const { ref: loaderRef, entry } = useIntersectionObserver({});
+interface BlogFeedProps {
+  initialPosts: Post[];
+  page: number;
+  hasNext: boolean;
+}
 
-  const loadPosts = async (pageNum: number) => {
-    const res = await fetch(`/api/blog/feed?page=${pageNum}&limit=10`);
-    const data: { posts?: Post[] } = await res.json();
-    if (data.posts?.length) {
-      setPosts((p) => [...p, ...(data.posts ?? [])]);
-      if (data.posts.length < 10) setHasMore(false);
-    } else {
-      setHasMore(false);
-    }
-  };
+export function BlogFeed({ initialPosts, page, hasNext }: BlogFeedProps) {
+  const [posts, setPosts] = useState<Post[]>(initialPosts);
 
   useEffect(() => {
-    loadPosts(1);
-    setPage(2);
-  }, []);
-
-  useEffect(() => {
-    if (entry?.isIntersecting && hasMore) {
-      loadPosts(page);
-      setPage((p) => p + 1);
-    }
-  }, [entry, hasMore, page]);
+    setPosts(initialPosts);
+  }, [initialPosts]);
 
   return (
     <div className="space-y-8">
@@ -81,12 +65,27 @@ export function BlogFeed() {
               href={`/blog/post/${p.id}`}
               className="mt-4 inline-block text-primary underline"
             >
-              Tovább
+              Read more
             </a>
           )}
         </motion.article>
       ))}
-      {hasMore && <div ref={loaderRef} className="h-10" />}
+      <div className="flex justify-between pt-4">
+        {page > 1 ? (
+          <Link href={`/?page=${page - 1}`} className="text-primary underline">
+            Previous
+          </Link>
+        ) : (
+          <span />
+        )}
+        {hasNext ? (
+          <Link href={`/?page=${page + 1}`} className="text-primary underline">
+            Next
+          </Link>
+        ) : (
+          <span />
+        )}
+      </div>
     </div>
   );
 }
