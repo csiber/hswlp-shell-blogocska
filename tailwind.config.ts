@@ -94,12 +94,18 @@ const config: Config = {
                         'fade-in': {
                                 from: { opacity: '0' },
                                 to: { opacity: '1' }
+                        },
+                        ambient: {
+                                '0%': { backgroundPosition: '0% 0%' },
+                                '50%': { backgroundPosition: '100% 100%' },
+                                '100%': { backgroundPosition: '0% 0%' }
                         }
                 },
                 animation: {
                         'accordion-down': 'accordion-down 0.2s ease-out',
                         'accordion-up': 'accordion-up 0.2s ease-out',
-                        'fade-in': 'fade-in 0.5s ease-in forwards'
+                        'fade-in': 'fade-in 0.5s ease-in forwards',
+                        ambient: 'ambient 60s ease-in-out infinite'
                 }
        }
   },

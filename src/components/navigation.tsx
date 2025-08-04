@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { useNavStore } from "@/state/nav";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SITE_NAME } from "@/constants";
+import ReaderModeToggle from "@/components/reader-mode-toggle";
 
 type NavItem = {
   name: string;
@@ -96,6 +97,7 @@ export function Navigation() {
                 ))
               )}
             </div>
+            <ReaderModeToggle />
             <ActionButtons />
           </div>
           <div className="md:hidden flex items-center">
@@ -130,7 +132,8 @@ export function Navigation() {
                             {item.name}
                           </Link>
                         ))}
-                        <div className="px-3 pt-4">
+                        <div className="px-3 pt-4 space-y-2">
+                          <ReaderModeToggle className="w-full">Reader mode</ReaderModeToggle>
                           <ActionButtons />
                         </div>
                       </>
