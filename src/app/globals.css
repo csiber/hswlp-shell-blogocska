@@ -22,6 +22,18 @@
   }
 }
 
+@keyframes ambient-shift {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
 @layer base {
   :root {
     --background: 26.7 100% 98%;
@@ -104,6 +116,13 @@
   }
   body {
     @apply min-h-screen bg-background text-foreground antialiased transition-colors duration-300;
+    background-image: radial-gradient(circle at 30% 30%, rgba(180, 180, 210, 0.2), rgba(230, 230, 255, 0.2));
+    background-size: 200% 200%;
+    animation: ambient-shift 60s ease-in-out infinite;
+  }
+
+  .dark body {
+    background-image: radial-gradient(circle at 30% 30%, rgba(45, 45, 77, 0.4), rgba(13, 13, 26, 0.4));
   }
 
   a {
