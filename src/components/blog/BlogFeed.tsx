@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "motion/react";
 import MarkdownViewer from "@/components/markdown-viewer";
 import CategoryBadge from "@/components/category-badge";
@@ -40,16 +39,6 @@ export function BlogFeed({ initialPosts, page, hasNext }: BlogFeedProps) {
             </time>
             <CategoryBadge name={p.category} />
           </div>
-          {p.imageUrl && (
-            <Image
-              src={p.imageUrl}
-              alt=""
-              width={800}
-              height={240}
-              className="my-2 max-h-60 w-full rounded-md object-cover"
-              unoptimized
-            />
-          )}
           <MarkdownViewer
             content={p.content}
             className="mt-2 text-sm leading-relaxed prose dark:text-white"

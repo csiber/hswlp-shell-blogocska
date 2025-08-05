@@ -24,8 +24,8 @@ export const createPostAction = createServerAction()
     const now = Math.floor(Date.now() / 1000);
 
     await env.DB.prepare(
-      `INSERT INTO posts (id, user_id, title, content, category, status, image_url, created_at, updated_at, slug)
-       VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10)`
+      `INSERT INTO posts (id, user_id, title, content, category, status, created_at, updated_at, slug)
+       VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)`
     )
       .bind(
         id,
@@ -34,7 +34,6 @@ export const createPostAction = createServerAction()
         input.content,
         input.category,
         'approved',
-        null,
         now,
         now,
         slug,

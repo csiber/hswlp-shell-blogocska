@@ -41,5 +41,4 @@ export interface BlogPost {
   authorName: string;
   category: string;
   createdAt: number;
-  imageUrl?: string | null;
 }
