@@ -32,7 +32,6 @@ export async function GET(
       content: postsTable.content,
       created_at: postsTable.created_at,
       status: postsTable.status,
-      image_url: postsTable.image_url,
       category_name: postCategoryTable.name,
     })
     .from(postsTable)
@@ -48,7 +47,6 @@ export async function GET(
     content: p.content,
     createdAt: normalizeTimestamp(p.created_at),
     status: p.status,
-    imageUrl: p.image_url,
     category: p.category_name,
   }))
 

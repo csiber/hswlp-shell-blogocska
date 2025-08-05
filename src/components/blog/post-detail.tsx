@@ -2,7 +2,6 @@ import { SITE_URL } from "@/constants";
 import CategoryBadge from "@/components/category-badge";
 import MarkdownViewer from "@/components/markdown-viewer";
 import ReadRewardTracker from "@/components/read-reward-tracker";
-import Image from "next/image";
 import type { BlogPost } from "@/types";
 
 interface PostDetailProps {
@@ -23,16 +22,6 @@ export default async function PostDetail({ id }: PostDetailProps) {
         <span>{post.authorName}</span>
         <CategoryBadge name={post.category} />
       </div>
-      {post.imageUrl && (
-        <Image
-          src={post.imageUrl}
-          alt=""
-          width={800}
-          height={400}
-          className="my-4 rounded-md"
-          unoptimized
-        />
-      )}
       <MarkdownViewer content={post.content} className="mt-4 prose leading-relaxed dark:text-white" postId={post.id} />
       <ReadRewardTracker postId={post.id} />
     </article>

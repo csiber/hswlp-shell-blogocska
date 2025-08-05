@@ -120,7 +120,6 @@ export const postsTable = sqliteTable('posts', {
   content: text(),
   category: text(),
   status: text({ enum: postStatusTuple }).default(POST_STATUS.PENDING).notNull(),
-  image_url: text(),
   created_at: integer({ mode: 'timestamp' }).$defaultFn(() => new Date()).notNull(),
   updated_at: integer({ mode: 'timestamp' }).$onUpdateFn(() => new Date()).notNull(),
 }, (table) => ([
