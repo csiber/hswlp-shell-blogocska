@@ -42,7 +42,8 @@
     "EMAIL_FROM": "no-reply@hswlp.hu",
     "EMAIL_FROM_NAME": "HSWLP System",
     "EMAIL_REPLY_TO": "support@hswlp.hu",
-    "SITE_URL": "https://blogocska.hu"
+    "SITE_URL": "https://blog.hswlp.hu",
+    "SITE_NAME": "HSWLP Blogocska"
   },
   /**
      * Note: Use secrets to store sensitive data.
