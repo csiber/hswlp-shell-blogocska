@@ -1,105 +1,62 @@
-# HSWLP:Next – Cloudflare alapú újgenerációs SaaS rendszer
+# Blogocska – Cloudflare-Powered Blogging Application
 
-## Blogocska shell
+**Blogocska** is a lightweight blogging application built on top of the  
+**HSWLP:Next** framework. It demonstrates how a modern SaaS-style app can  
+run entirely on **Cloudflare Workers**, with **no traditional backend**.
 
-Ez a repository tartalmazza a **Blogocska** alkalmazást, amely egy egyszerű blogfelület Cloudflare Workers környezetben. A frontend Next.js alapokra épül, a háttérben pedig D1 adatbázist és R2 tárhelyet használ.
-
-Fő funkciók:
-
-- Bejegyzések létrehozása és megjelenítése
-- Felhasználói hitelesítés JWT alapon
-- Teljesen szerver nélküli működés
-
-Ez a repository a HSWLP platform `hswlp-next` nevű **új alaprendszere**, amelyre a különböző frontend rétegek (ún. **shellek**) épülnek. A rendszer teljesen Cloudflare-infrastruktúrán fut (Workers, D1, R2, KV), és készen áll SaaS alkalmazások hosztolására – külön back-end nélkül.
-
-Ez az alap biztosítja a következőket:
-
-- Bejelentkezés, regisztráció, email hitelesítés
-- Turnstile captcha
-- Cloudflare D1 adatbázis migrációkkal
-- R2 tárhely és KV session kezelés
-- Alkalmas Cloudflare Pages és Edge funkciók kiszolgálására
+The project is part of the **HSWLP (Hybrid Service Workflow Launch Platform)**  
+ecosystem, which focuses on building modular, Cloudflare-native applications.
 
 ---
 
-## Használat lokálisan
+## ✨ Key Features
 
-1. Telepítés:
-
-   ```bash
-   pnpm install
-   ```
-
-2. Környezeti változók:
-
-   - Másold le a `.env.example` fájlt `.env` néven, majd töltsd ki.
-   - Ha használod: `.dev.vars.example` → `.dev.vars`
-
-3. Lokális migráció és indítás:
-
-   ```bash
-   pnpm db:migrate:dev
-   pnpm dev
-   ```
-
-4. Nyisd meg a böngészőben:
-   [http://localhost:3000](http://localhost:3000)
+- 📝 **Post management** – create and publish blog posts  
+- 🔐 **User authentication** – JWT-based sign-up and login  
+- ☁️ **Cloudflare-native architecture** – powered by D1 (database) and R2 (storage)  
+- 🚀 **Serverless by design** – zero backend servers required  
 
 ---
 
-## Cloudflare deploy
+## 🛠️ Technology Stack
 
-A rendszer automatikusan deployolható Cloudflare Workers-re:
-
-```bash
-pnpm run deploy
-```
-
-Ez lefuttatja az `opennext:build` és `opennextjs-cloudflare deploy` parancsokat, majd feltölti:
-
-- a Worker kódot
-- statikus asseteket (R2)
-- titkos környezeti változókat (`wrangler secret put`)
-- valamint a `wrangler.json` alapján hozzárendeli:
-  - D1 adatbázist
-  - KV namespace-eket
-  - R2 bucketet
-
-A `.env` fájl NEM kerül automatikusan feltöltésre – a titkos adatokat külön kell beállítani `wrangler secret put` paranccsal vagy a Cloudflare dashboardon.
+- **Frontend:** Next.js  
+- **Platform:** Cloudflare Workers  
+- **Database:** D1 with migrations  
+- **Storage:** R2 (object storage)  
+- **Session handling:** Cloudflare KV  
 
 ---
 
-## Fontos konfigurációs helyek
+## 📅 Current Status
 
-- Állandók: `src/constants.ts`
-- Email sablonok: `src/react-email/`
-- Globális CSS: `src/app/globals.css`
-- Meta adatok: `src/app/layout.tsx`
-- Wrangler config: `wrangler.json`
+🚧 **In development** – Blogocska is an early-stage project, intended as both  
+a standalone blogging tool and a reference app for the HSWLP:Next framework.  
 
 ---
 
-## Email sablonok előnézete
+## 📌 Roadmap
 
-```bash
-pnpm email:dev
-```
+- [ ] User-friendly blog editor  
+- [ ] Commenting system  
+- [ ] Theming and customization  
+- [ ] Admin dashboard for content management  
+- [ ] Deployment via Cloudflare Pages  
 
-→ [http://localhost:3001](http://localhost:3001)
+---
+
+## 🌍 Part of the HSWLP Ecosystem
+
+HSWLP:Next serves as the foundation for all future shells (apps), including:  
+
+- **HSWLP:Cloud** – Static website deployments  
+- **HSWLP:NAS** – Local Docker stack manager  
+- **HSWLP:Dev** – Developer hub  
+- **HSWLP:Store** – Template marketplace  
+- **HSWLP:Academy** – Learning modules  
+
+Blogocska is the **first live demo** of how HSWLP:Next can power real SaaS apps.  
 
 ---
 
-## A rendszer jövője
-
-A `hswlp-next` az alapja minden jövőbeli HSWLP shellnek, ideértve:
-
-- `HSWLP:Cloud` (statikus site deploy)
-- `HSWLP:NAS` (helyi Docker stack manager)
-- `HSWLP:Dev` (fejlesztői központ)
-- `HSWLP:Store` (sablon piactér)
-- `HSWLP:Academy` (oktatási modul)
-
-Egy közös rendszer, több célra.
-Tisztán, Cloudflare-alapon.
-
----
+**Status:** Prototype – showcasing how Cloudflare-native SaaS can be built cleanly and efficiently.  
